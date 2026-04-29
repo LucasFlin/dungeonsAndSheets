@@ -1,0 +1,112 @@
+@font-face{
+    font-family: "FonteHUD";
+    src: url("./fonte/knightwish-regular.otf") format('opentype');
+    src: url("./fonte/knightwish-regular.ttf") format('truetype');
+}
+
+body{
+    margin: 0px;
+    height: 100vh;
+}
+
+.pagina{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cabecalho{
+    background-color: #c62b29;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    height: 10vh;
+    font-family: "FonteHUD";
+    font-size: 25px;
+    a{
+        text-decoration: none;
+        color: white;
+    }
+}
+
+.icone{
+    height: 50px;
+}
+
+.fundo-inicial{
+    background: url('./img/fundo-dragao.jpg') no-repeat top center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: large;
+    height: 90vh;
+}
+
+.logo{
+    height: 200px;
+}
+
+.atual{
+    font-weight: bold;
+}
+
+.fundo-login-cadastro{
+    background: url('./img/taverna.jpg') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.pergaminho-login{
+    background: url('./img/pergaminho.png') no-repeat center center/cover;
+    width: 254px;
+    height: 324px;
+    color: #c62b29;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "FonteHUD";
+    font-size: larger;
+}
+
+.pergaminho-cadastro{
+    background: url('./img/pergaminho.png') no-repeat center center/cover;
+    width: 331px;
+    height: 396px;
+    color: #c62b29;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "FonteHUD";
+    font-size: larger;
+}
+
+.escrita{
+    background: none;
+    border-width: 0px 0px 1px 0px;
+    border-color: #c62b29;
+    margin-bottom: 10px;
+}
+
+.botao{
+    background: #c62b29;
+    color: white;
+    border-radius: 10px;
+    height: 50px;
+    width: fit-content;
+    padding: 10px 30px 10px 30px;
+    border-style: none;
+    margin: 15px 10px 10px 10px;
+}
+
+.texto{
+    margin: 5px;
+}
