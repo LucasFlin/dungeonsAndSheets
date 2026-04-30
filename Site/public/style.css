@@ -105,6 +105,12 @@ body{
     padding: 10px 30px 10px 30px;
     border-style: none;
     margin: 15px 10px 10px 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao:hover{
+    padding: 19px 31px 21px 31px;
 }
 
 .texto{
