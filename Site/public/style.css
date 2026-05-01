@@ -22,7 +22,7 @@ body{
     align-items: center;
     padding: 10px 20px 10px 20px;
     color: white;
-    height: 10vh;
+    height: 10%;
     font-family: "FonteHUD";
     font-size: 25px;
     a{
@@ -43,7 +43,7 @@ body{
     align-items: center;
     color: white;
     font-size: large;
-    height: 90vh;
+    height: 89vh;
 }
 
 .logo{

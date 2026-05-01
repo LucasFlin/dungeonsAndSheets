@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="icon" href="../../../logo/DNS_Logo-com fundo.ico">
     <script src="../script.js"></script>
 </head>
+
 <body>
     <div class="pagina">
         <div class="cabecalho">
@@ -19,21 +21,32 @@
         <div class="fundo-login-cadastro">
             <div class="pergaminho-cadastro">
                 <span class="texto">Nome:</span>
-                <input type="text" id="ipt_email" class="escrita">
+                <input type="text" id="ipt_nome" class="escrita" maxlength="100">
                 <div id="div_nome"></div>
                 <span class="texto">Email:</span>
-                <input type="text" id="ipt_email" class="escrita">
+                <input type="text" id="ipt_email" class="escrita" maxlength="100">
                 <div id="div_email"></div>
                 <span class="texto">Senha:</span>
-                <input type="text" id="ipt_senha" class="escrita">
+                <input type="password" id="ipt_senha" class="escrita" minlength="6">
                 <div id="div_senha"></div>
                 <span class="texto">Confirar Senha:</span>
-                <input type="text" id="ipt_email" class="escrita">
-                <div id="div_conf-senha"></div>
-                <button class="botao">Criar Cadastro</button>
+                <input type="password" id="ipt_confSenha" class="escrita">
+                <div id="div_confSenha"></div>
+                <button class="botao" onclick="validar(ipt_nome.value, ipt_email.value, ipt_senha.value, ipt_confSenha.value)">Entrar para a Guilda dos Jogadores</button>
             </div>
         </div>
     </div>
 </body>
-</body>
+
 </html>
+<script>
+    let nome = ipt_nome.value
+    let email = ipt_email.value
+    let senha = ipt_senha.value
+    let confSenha = ipt_confSenha.value
+    let erros = 0
+    let alerta = `Você está prestes à assinar o formulário de admissão da Guilda, mas a atendente para sua mão antes que a caneta toque o papel.
+
+Ela diz:
+"Calma aí aventureiro, `
+</script>
