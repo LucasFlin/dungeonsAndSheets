@@ -1,5 +1,5 @@
 function nomeValido(texto) {
-    let teste_letras = new RegExp("[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZãÃâÂáÁàÀäÄêÊéÉèÈëËíÍìÌïÏîÎõÕôÔóÓòÒöÖûÛúÚùÙüÜñÑçÇýÝ]")
+    let teste_letras = new RegExp("[ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZãÃâÂáÁàÀäÄêÊéÉèÈëËíÍìÌïÏîÎõÕôÔóÓòÒöÖûÛúÚùÙüÜñÑçÇýÝ]")
     for (let i = 0; i < texto.length; i++) {
         if (teste_letras.test(texto[i]) == false) {
             return 1
@@ -100,10 +100,11 @@ function validar(t1, t2, t3, t4) {
         alerta += `${msg1}, ${msg2}, ${msg4} e ${msg8}. São as regras da guilda."`
         alert(alerta)
     } else {
+        cadastrar()
         alert(`Após assinar o pergaminho a atendente pega-o e começa a ler os dados informados.
             
 Alguns segundos se passam e ela guarda a folha abaixo do balcão enquanto olha para você com um sorrizo dizendo:
-"Será um prazer ter você com a gente, ${t1}!"`)
+"Será um prazer ter você com a gente, ${t1}!"`)  
     }
 
     alerta = `Você está prestes à assinar o formulário de admissão da Guilda, mas a atendente para sua mão antes que a caneta toque o papel.

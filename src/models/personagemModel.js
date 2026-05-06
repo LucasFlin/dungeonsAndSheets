@@ -18,6 +18,6 @@ function cadastrar(playerId, nome, raca, classe, forca, destreza, constituicao, 
 
 
 module.exports = {
-  buscarPersonagensPorplayer,
+  buscarPersonagensPorPlayer,
   cadastrar
 }

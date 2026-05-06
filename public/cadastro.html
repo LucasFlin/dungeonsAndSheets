@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="icon" href="../../../logo/DNS_Logo-com fundo.ico">
-    <script src="../script.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./logo/DNS_Logo-com fundo.ico">
+    <script src="./script.js"></script>
+    <script src="./js/sessao.js"></script>
+
 </head>
 
 <body>
     <div class="pagina">
         <div class="cabecalho">
-            <a href="./index.html"><img src="../../../logo/DNS_Logo-full-branco.png" class="icone"></a>
+            <a href="./index.html"><img src="./logo/DNS_Logo-full-branco.png" class="icone"></a>
             <div>
                 <a href="./login.html">Login</a> | <a href="./cadastro.html" class="atual">Cadastro</a>
             </div>
@@ -45,4 +47,48 @@
 
 Ela diz:
 "Calma aí aventureiro, `
+
+function cadastrar() {
+    // aguardar();
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nome,
+        emailServer: email,
+        senhaServer: senha,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
 </script>
