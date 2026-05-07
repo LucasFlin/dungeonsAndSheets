@@ -48,7 +48,7 @@
 Ela diz:
 "Calma aí aventureiro, `
 
-function cadastrar() {
+function cadastrar(v1, v2, v3) {
     // aguardar();
 
     // Enviando o valor da nova input
@@ -60,9 +60,9 @@ function cadastrar() {
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nome,
-        emailServer: email,
-        senhaServer: senha,
+        nomeServer: v1,
+        emailServer: v2,
+        senhaServer: v3
       }),
     })
       .then(function (resposta) {

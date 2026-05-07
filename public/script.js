@@ -100,7 +100,7 @@ function validar(t1, t2, t3, t4) {
         alerta += `${msg1}, ${msg2}, ${msg4} e ${msg8}. São as regras da guilda."`
         alert(alerta)
     } else {
-        cadastrar()
+        cadastrar(t1, t2, t3)
         alert(`Após assinar o pergaminho a atendente pega-o e começa a ler os dados informados.
             
 Alguns segundos se passam e ela guarda a folha abaixo do balcão enquanto olha para você com um sorrizo dizendo:
