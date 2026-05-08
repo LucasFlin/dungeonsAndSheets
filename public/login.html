@@ -24,7 +24,7 @@
                 <span class="texto">Senha:</span>
                 <input type="password" id="ipt_senha" class="escrita">
                 <div id="div_senha"></div>
-                <button class="botao">Entrar na Guilda</button>
+                <button class="botao" onclick="entrar()">Entrar na Guilda</button>
             </div>
         </div>
     </div>
@@ -32,20 +32,17 @@
 </html>
 <script>
     function entrar() {
-        aguardar();
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            alert(`Você entrega seu pergaminho para a atendente no balcão.
+
+Após olhar a folha ela te entrega novamente dizendo:
+"Por favor, preencha todos os campos antes de prosseguir, não posso lhe dar acesso ao resto da Guilda sem eles..."`);
             return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
+        }   
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -84,7 +81,6 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 

@@ -20,7 +20,7 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        aquarioModel.buscarPersonagensPorPlayer(resultadoAutenticar[0].playerId)
+                        personagemModel.buscarPersonagensPorPlayer(resultadoAutenticar[0].id_player)
                             .then((resultadoPersonagens) => {
                                 if (resultadoPersonagens.length > 0) {
                                     res.json({
