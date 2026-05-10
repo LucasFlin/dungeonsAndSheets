@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./logo/DNS_Logo-com fundo.ico">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
     <div class="pagina">
@@ -20,56 +21,88 @@
         </div>
     </div>
 
-    <div>
+    <div class="dash-geral">
         <!-- Divisão -->
-        <div>
+        <div class="dash-colunas">
             <!-- Colunas -->
-            <div>
+            <div class="dash-coluna">
                 <!-- Coluna -->
-                <div>
-                    <p>Seu personagem mais Forte:</p>
-                    <div>
-                        <span id="forte"></span>
+                <div class="dash-atributo">
+                    <p class="titulo">Seu personagem mais <span class="destaque">Forte</span>:</p>
+                    <div class="dash-personagem">
+                        <span class="titulo" id="forte">Lorem Ipsum</span>
                     </div>
                 </div>
-                <div>
-                    <p>Seu personagem mais Resistente:</p>
-                    <div>
-                        <span id="resistente"></span>
+                <div class="dash-atributo">
+                    <p class="titulo">Seu personagem mais <span class="destaque">Resistente</span>:</p>
+                    <div class="dash-personagem">
+                        <span class="titulo" id="resistente">Lorem Ipsum</span>
                     </div>
                 </div>
-                <div>
-                    <p>Seu personagem mais Ágil:</p>
-                    <div>
-                        <span id="agil"></span>
+                <div class="dash-atributo">
+                    <p class="titulo">Seu personagem mais <span class="destaque">Ágil</span>:</p>
+                    <div class="dash-personagem">
+                        <span class="titulo" id="agil">Lorem Ipsum</span>
                     </div>
                 </div>
             </div>
-            <div>
-                <div>
-                    <p>Seu personagem mais Inteligente:</p>
-                    <div>
-                        <span id="inteligente"></span>
+            <div class="dash-coluna">
+                <div class="dash-atributo">
+                    <p class="titulo">Seu personagem mais <span class="destaque">Inteligente</span>:</p>
+                    <div class="dash-personagem">
+                        <span class="titulo" id="inteligente">Lorem Ipsum</span>
                     </div>
                 </div>
-                <div>
-                    <p>Seu personagem mais Sábio:</p>
-                    <div>
-                        <span id="sabio"></span>
+                <div class="dash-atributo">
+                    <p class="titulo">Seu personagem mais <span class="destaque">Sábio</span>:</p>
+                    <div class="dash-personagem">
+                        <span class="titulo" id="sabio">Lorem Ipsum</span>
                     </div>
                 </div>
-                <div>
-                    <p>Seu personagem mais Carismático:</p>
-                    <div>
-                        <span id="carismatico"></span>
+                <div class="dash-atributo">
+                    <p class="titulo">Seu personagem mais <span class="destaque">Carismático</span>:</p>
+                    <div class="dash-personagem">
+                        <span class="titulo" id="carismatico">Lorem Ipsum</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div> 
-            <canvas id="grafico_dados"></canvas>
+        <div class="dash-coluna">
+            <p class="titulo">Suas últimas rolagens de <span class="destaque">d20</span>:</p>
+            <canvas id="grafico" class="grafico"></canvas>
         </div>
     </div>
 </body>
 
 </html>
+<script>
+    const grafDados = document.getElementById('grafico');
+
+    new Chart(grafDados, {
+        type: 'line',
+        data: {
+            labels: ['Fil Mahar', 'Fil Mahar', 'Fil Mahar', 'Fil Mahar', 'Fil Mahar', 'Fil Mahar', 'Fil Mahar', 'Raphael', 'Raphael', 'Raphael'],
+            datasets: [{
+                label: 'd20',
+                data: [5, 1, 13, 13, 1, 1, 4, 13, 19, 3],
+                borderWidth: 1,
+                borderColor: '#c62b29',
+                backgroundColor: '#c62b29'
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    ticks: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>

@@ -127,3 +127,51 @@ body{
 .texto{
     margin: 5px;
 }
+
+.dash-geral{
+    display: flex;
+    justify-content: space-around;
+    margin: 3% 0% 0% 0%;
+}
+
+.dash-colunas{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dash-coluna{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dash-personagem{
+    justify-content: center;
+    padding: 30px 45px 30px 45px;
+    align-items: center;
+    background: #c62b29;
+    border-radius: 10px;
+    color: whitesmoke;
+}
+
+.dash-atributo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'FonteHUD';
+}
+
+.destaque{
+    color: #c62b29;
+}
+
+.titulo{
+    font-family: "FonteHUD";
+    font-size: larger   ;
+}
+
+.grafico{
+    height: 100%;
+}
