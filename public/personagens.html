@@ -22,7 +22,7 @@
         <div>
             <!-- Personagem e vida -->
 
-            <dialog popover="auto" id="criar_ficha" open class="ficha">
+            <dialog popover="auto" id="criar_ficha" class="ficha">
                 <div class="ficha-input">
                     <span>Nome:</span>
                     <input type="text" id="ipt_nome">
@@ -66,9 +66,14 @@
                         <div><input type="checkbox" id="chk_religiao"><label for="chk_religiao">Religião <span>(Int)</span></label></div>
                         <div><input type="checkbox" id="chk_sobrevivencia"><label for="chk_sobrevivencia">Sobrevivência <span>(Sab)</span></label></div>
                     </div>
-                    <button>Criar Personagem</button>
+                    <button onclick="add()">Criar Personagem</button>
                 </div>
             </dialog>
+
+            <select id="slct_personagem" oninput="trocaPersonagem()">
+                <option value=""></option>
+                <option value="novo">Novo personagem...</option>
+            </select>
         </div>
         <div>
             <!-- Dados -->
@@ -80,11 +85,17 @@
 </body>
 </html>
 <script>
-    function teste(){
-        dialogo.open = true
+    function trocaPersonagem(){
+        let valor = slct_personagem.value
+
+        if(valor == 'novo'){
+            criar_ficha.open = true
+        }
     }
-    function fechar(){
-        div_dialogo.innerHTML = ipt_teste.value
-        dialogo.open = false
+    function add(){
+        let nome = ipt_nome.value
+
+        slct_personagem.innerHTML += `<option id='0'>${nome}</option>`
+        criar_ficha.open = false
     }
 </script>
