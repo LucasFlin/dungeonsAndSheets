@@ -79,12 +79,9 @@ sobrevivencia tinyint default 0);
 create index lista_pericias on pericias(fk_personagem);
 
 create table resultados (
-    id int auto_increment,
-    fk_player int,
-    constraint dado_player foreign key (fk_player) references usuarios(id_player),
-    primary key (id, fk_player),
-    dado int,
-    fk_personagem int,
-    constraint dado_personagem foreign key (fk_personagem) references personagens(id_personagem),
-    data_rolagem datetime default current_timestamp() 
-);
+id int auto_increment,
+fk_player int,
+constraint rolagens_player foreign key (fk_player) references usuarios(id_player),
+primary key(id, fk_player),
+dado int);
+dado int);

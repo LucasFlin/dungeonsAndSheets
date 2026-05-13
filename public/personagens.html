@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personagens</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./logo/DNS_Logo-com fundo.ico">
+    <script src="..\src\controllers\personagemController.js"></script>
 </head>
+
 <body>
     <div class="pagina">
         <div class="cabecalho">
@@ -38,33 +41,69 @@
                     </div>
                 </div>
                 <div>
-                    <div>
-                        <input type="number" id="ipt_for">
-                        <input type="number" id="ipt_dex">
-                        <input type="number" id="ipt_const">
-                        <input type="number" id="ipt_int">
-                        <input type="number" id="ipt_sab">
-                        <input type="number" id="ipt_car">
+                    <div class="ficha-stats">
+                        <div>
+                            <input type="number" id="ipt_for">
+                            <div id="div_for">0</div>
+                        </div>
+                        <div>
+                            <input type="number" id="ipt_dex">
+                            <div id="div_dex">0</div>
+                        </div>
+                        <div>
+                            <input type="number" id="ipt_const">
+                            <div id="div_const">0</div>
+                        </div>
+                        <div>
+                            <input type="number" id="ipt_int">
+                            <div id="div_int">0</div>
+                        </div>
+                        <div>
+                            <input type="number" id="ipt_sab">
+                            <div id="div_sab">0</div>
+                        </div>
+                        <div>
+                            <input type="number" id="ipt_car">
+                            <div id="div_car">0</div>
+                        </div>
                     </div>
                     <div>
-                        <div><input type="checkbox" id="chk_acrobacia"><label for="chk_acrobacia">Acrobacia <span>(Des)</span></label></div>
-                        <div><input type="checkbox" id="chk_arcanismo"><label for="chk_arcanismo">Arcanismo <span>(Int)</span></label></div>
-                        <div><input type="checkbox" id="chk_atletismo"><label for="chk_atletismo">Atletismo <span>(For)</span></label></div>
-                        <div><input type="checkbox" id="chk_atuacao"><label for="chk_atuacao">Atuação <span>(Car)</span></label></div>
-                        <div><input type="checkbox" id="chk_enganacao"><label for="chk_enganacao">Enganação <span>(Car)</span></label></div>
-                        <div><input type="checkbox" id="chk_furtividade"><label for="chk_furtividade">Furtividade <span>(Des)</span></label></div>
-                        <div><input type="checkbox" id="chk_historia"><label for="chk_historia">Historia <span>(Int)</span></label></div>
-                        <div><input type="checkbox" id="chk_intimidacao"><label for="chk_intimidacao">Intimidação <span>(Car)</span></label></div>
-                        <div><input type="checkbox" id="chk_intuicao"><label for="chk_intuicao">Intuição <span>(Sab)</span></label></div>
-                        <div><input type="checkbox" id="chk_investigacao"><label for="chk_investigacao">Investigação <span>(Int)</span></label></div>
-                        <div><input type="checkbox" id="chk_lidar"><label for="chk_lidar">Lidar com Animais <span>(Sab)</span></label></div>
-                        <div><input type="checkbox" id="chk_medicina"><label for="chk_medicina">Medicina <span>(Sab)</span></label></div>
-                        <div><input type="checkbox" id="chk_natureza"><label for="chk_natureza">Natureza <span>(Int)</span></label></div>
-                        <div><input type="checkbox" id="chk_percepcao"><label for="chk_percepcao">Percepção <span>(Sab)</span></label></div>
-                        <div><input type="checkbox" id="chk_persuasao"><label for="chk_persuasao">Persuasão <span>(Car)</span></label></div>
-                        <div><input type="checkbox" id="chk_prestidigitacao"><label for="chk_prestidigitacao">Prestidigitação <span>(Des)</span></label></div>
-                        <div><input type="checkbox" id="chk_religiao"><label for="chk_religiao">Religião <span>(Int)</span></label></div>
-                        <div><input type="checkbox" id="chk_sobrevivencia"><label for="chk_sobrevivencia">Sobrevivência <span>(Sab)</span></label></div>
+                        <div><input type="checkbox" id="chk_acrobacia"><label for="chk_acrobacia">Acrobacia
+                                <span>(Des)</span></label></div>
+                        <div><input type="checkbox" id="chk_arcanismo"><label for="chk_arcanismo">Arcanismo
+                                <span>(Int)</span></label></div>
+                        <div><input type="checkbox" id="chk_atletismo"><label for="chk_atletismo">Atletismo
+                                <span>(For)</span></label></div>
+                        <div><input type="checkbox" id="chk_atuacao"><label for="chk_atuacao">Atuação
+                                <span>(Car)</span></label></div>
+                        <div><input type="checkbox" id="chk_enganacao"><label for="chk_enganacao">Enganação
+                                <span>(Car)</span></label></div>
+                        <div><input type="checkbox" id="chk_furtividade"><label for="chk_furtividade">Furtividade
+                                <span>(Des)</span></label></div>
+                        <div><input type="checkbox" id="chk_historia"><label for="chk_historia">Historia
+                                <span>(Int)</span></label></div>
+                        <div><input type="checkbox" id="chk_intimidacao"><label for="chk_intimidacao">Intimidação
+                                <span>(Car)</span></label></div>
+                        <div><input type="checkbox" id="chk_intuicao"><label for="chk_intuicao">Intuição
+                                <span>(Sab)</span></label></div>
+                        <div><input type="checkbox" id="chk_investigacao"><label for="chk_investigacao">Investigação
+                                <span>(Int)</span></label></div>
+                        <div><input type="checkbox" id="chk_lidar"><label for="chk_lidar">Lidar com Animais
+                                <span>(Sab)</span></label></div>
+                        <div><input type="checkbox" id="chk_medicina"><label for="chk_medicina">Medicina
+                                <span>(Sab)</span></label></div>
+                        <div><input type="checkbox" id="chk_natureza"><label for="chk_natureza">Natureza
+                                <span>(Int)</span></label></div>
+                        <div><input type="checkbox" id="chk_percepcao"><label for="chk_percepcao">Percepção
+                                <span>(Sab)</span></label></div>
+                        <div><input type="checkbox" id="chk_persuasao"><label for="chk_persuasao">Persuasão
+                                <span>(Car)</span></label></div>
+                        <div><input type="checkbox" id="chk_prestidigitacao"><label
+                                for="chk_prestidigitacao">Prestidigitação <span>(Des)</span></label></div>
+                        <div><input type="checkbox" id="chk_religiao"><label for="chk_religiao">Religião
+                                <span>(Int)</span></label></div>
+                        <div><input type="checkbox" id="chk_sobrevivencia"><label for="chk_sobrevivencia">Sobrevivência
+                                <span>(Sab)</span></label></div>
                     </div>
                     <button onclick="add()">Criar Personagem</button>
                 </div>
@@ -76,23 +115,44 @@
             </select>
         </div>
         <div>
-            <!-- Dados -->
+            <button id="btn_forca"></button>
+            <button id="btn_des"></button>
+            <button id="btn_cons"></button>
+            <button id="btn_int"></button>
+            <button id="btn_sab"></button>
+            <button id="btn_car"></button>
         </div>
         <div>
-            <!-- Habilidades e Inventários -->
+
         </div>
     </div>
 </body>
+
 </html>
 <script>
-    function trocaPersonagem(){
+
+    window.onload = buscarPersonagensPorPlayer()
+
+    function buscarPersonagensPorPlayer(){
+        var aquarios = JSON.parse(sessionStorage.PERSONAGENS);
+        aquarios.forEach(item => {
+            document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
+            obterDadosGrafico(item.id)
+        });
+
+        if (aquarios.length > 0) {
+            exibirAquario(aquarios[0].id)
+        }
+    }
+
+    function trocaPersonagem() {
         let valor = slct_personagem.value
 
-        if(valor == 'novo'){
+        if (valor == 'novo') {
             criar_ficha.open = true
         }
     }
-    function add(){
+    function add() {
         let nome = ipt_nome.value
 
         slct_personagem.innerHTML += `<option id='0'>${nome}</option>`

@@ -175,3 +175,8 @@ body{
 .grafico{
     height: 100%;
 }
+
+.ficha-stats{
+    display: flex;
+    justify-content: space-evenly;
+}

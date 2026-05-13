@@ -10,7 +10,7 @@ function buscarPersonagensPorPlayer(playerId) {
 
 function cadastrar(playerId, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma) {
   
-  var instrucaoSql = `INSERT INTO (fk_player, nome, raca, classe, forc, des, cons, intel, sab, car) personagens VALUES (${playerId}, ${nome}, ${raca}, ${classe}, ${forca}, ${destreza}, ${constituicao}, ${inteligencia}, ${sabedoria}, ${carisma})`;
+  var instrucaoSql = `INSERT INTO personagens (fk_player, nome, raca, classe, forc, des, cons, intel, sab, car) VALUES (${playerId}, ${nome}, ${raca}, ${classe}, ${forca}, ${destreza}, ${constituicao}, ${inteligencia}, ${sabedoria}, ${carisma})`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
