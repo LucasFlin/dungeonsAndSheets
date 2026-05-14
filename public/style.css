@@ -176,7 +176,57 @@ body{
     height: 100%;
 }
 
+.pers-geral{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+}
+
 .ficha-stats{
     display: flex;
     justify-content: space-evenly;
+}
+
+.hp{
+    width: 30%;
+
+}
+
+.graf_vida{
+    display: flex;
+    flex-direction: row;
+}
+
+.linha{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    width: 90vw;
+}
+
+.select_personagem{
+    height: 60px;
+    width: 400px;
+}
+
+.dado{
+    background: url(./img/d20.png) no-repeat center center/cover;
+    height: 90px;
+    width: 90px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+}
+.dado:hover{
+    cursor: pointer;
+}
+
+.atributos{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100vw;
 }

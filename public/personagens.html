@@ -108,19 +108,26 @@
                     <button onclick="add()">Criar Personagem</button>
                 </div>
             </dialog>
-
-            <select id="slct_personagem" oninput="trocaPersonagem()">
-                <option value=""></option>
-                <option value="novo">Novo personagem...</option>
-            </select>
+            <div class="linha">
+                <select id="slct_personagem" oninput="trocaPersonagem()" class="select_personagem">
+                    <option value=""></option>
+                    <option value="novo">Novo personagem...</option>
+                </select>
+                <div class="hp">
+                    <p id="numero_hp">12/12</p>
+                    <div class="graf_vida">
+                        <button>+</button> <canvas id="barra_vida"></canvas> <button>-</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <button id="btn_forca"></button>
-            <button id="btn_des"></button>
-            <button id="btn_cons"></button>
-            <button id="btn_int"></button>
-            <button id="btn_sab"></button>
-            <button id="btn_car"></button>
+        <div class="atributos">
+            <button id="btn_forca" class="dado">-1</button>
+            <button id="btn_des" class="dado">0</button>
+            <button id="btn_cons" class="dado">+1</button>
+            <button id="btn_int" class="dado">+1</button>
+            <button id="btn_sab" class="dado">+2</button>
+            <button id="btn_car" class="dado">+2</button>
         </div>
         <div>
 
@@ -133,15 +140,15 @@
 
     window.onload = buscarPersonagensPorPlayer()
 
-    function buscarPersonagensPorPlayer(){
-        var aquarios = JSON.parse(sessionStorage.PERSONAGENS);
-        aquarios.forEach(item => {
+    function buscarPersonagensPorPlayer() {
+        var personagens = JSON.parse(sessionStorage.PERSONAGENS);
+        personagens.forEach(item => {
             document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
             obterDadosGrafico(item.id)
         });
 
-        if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].id)
+        if (personagens.length > 0) {
+            exibirAquario(personagens[0].id)
         }
     }
 
