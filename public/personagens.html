@@ -266,8 +266,10 @@
         let prestidigitacao = toTinyInt(chk_prestidigitacao)
         let religiao = toTinyInt(chk_religiao)
         let sobrevivencia = toTinyInt(chk_acrobacia)
-
+        
         let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
+
+        console.log(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
 
         console.log(`Id do personagem criado: ${idPersonagem}`)
         slct_personagem.innerHTML += `<option id='${idPersonagem}'>${nome}</option>`

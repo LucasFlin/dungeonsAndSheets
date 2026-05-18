@@ -32,7 +32,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", resultadosRouter);
-app.use("/aquarios", personagensRouter);
+app.use("/personagem", personagensRouter);
 app.use("/empresas", empresasRouter);
 
 app.listen(PORTA_APP, function () {
