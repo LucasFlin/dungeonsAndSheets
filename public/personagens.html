@@ -7,7 +7,7 @@
     <title>Personagens</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./logo/DNS_Logo-com fundo.ico">
-    <script src="..\src\controllers\personagemController.js"></script>
+    <script src="./js/sessao.js"></script>
 </head>
 
 <body>
@@ -105,7 +105,7 @@
                         <div><input type="checkbox" id="chk_sobrevivencia"><label for="chk_sobrevivencia">Sobrevivência
                                 <span>(Sab)</span></label></div>
                     </div>
-                    <button onclick="add()">Criar Personagem</button>
+                    <button onclick="criarPersonagem()">Criar Personagem</button>
                 </div>
             </dialog>
             <div class="linha">
@@ -116,18 +116,95 @@
                 <div class="hp">
                     <p id="numero_hp">12/12</p>
                     <div class="graf_vida">
-                        <button>+</button> <canvas id="barra_vida"></canvas> <button>-</button>
+                        <button>+</button> <progress id="barra_hp"></progress> <button>-</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="atributos">
-            <button id="btn_forca" class="dado">-1</button>
-            <button id="btn_des" class="dado">0</button>
-            <button id="btn_cons" class="dado">+1</button>
-            <button id="btn_int" class="dado">+1</button>
-            <button id="btn_sab" class="dado">+2</button>
-            <button id="btn_car" class="dado">+2</button>
+        <div class="caixa_atributos">
+            <div class="atributos">
+                <div class="atributo">
+                    <p>Força</p>
+                    <button id="roll_forca" class="dado" onclick="roll(forc)">-1</button>
+                </div>
+                <div class="atributo">
+                    <p>Destreza</p>
+                    <button id="roll_des" class="dado" onclick="roll(des)">0</button>
+                </div>
+                <div class="atributo">
+                    <p>Constituição</p>
+                    <button id="roll_cons" class="dado" onclick="roll(cons)">+1</button>
+                </div>
+                <div class="atributo">
+                    <p>Inteligência</p>
+                    <button id="roll_int" class="dado" onclick="roll(intel)">+1</button>
+                </div>
+                <div class="atributo">
+                    <p>Sabedoria</p>
+                    <button id="roll_sab" class="dado" onclick="roll(sab)">+2</button>
+                </div>
+                <div class="atributo">
+                    <p>Carisma</p>
+                    <button id="roll_car" class="dado" onclick="roll(car)">+2</button>
+                </div>
+            </div>
+            <div class="pericias">
+                <div><button id="roll_acrobacia" class="dadinho" onclick="rollPericia(acrobacia)"></button><label
+                        for="roll_acrobacia">Acrobacia
+                        <span>(Des)</span></label></div>
+                <div><button id="roll_arcanismo" class="dadinho" onclick="rollPericia(arcanismo)"></button><label
+                        for="roll_arcanismo">Arcanismo
+                        <span>(Int)</span></label></div>
+                <div><button id="roll_atletismo" class="dadinho" onclick="rollPericia(atletismo)"></button><label
+                        for="roll_atletismo">Atletismo
+                        <span>(For)</span></label></div>
+                <div><button id="roll_atuacao" class="dadinho" onclick="rollPericia(atuacao)"></button><label
+                        for="roll_atuacao">Atuação
+                        <span>(Car)</span></label></div>
+                <div><button id="roll_enganacao" class="dadinho" onclick="rollPericia(blefar)"></button><label
+                        for="roll_enganacao">Enganação
+                        <span>(Car)</span></label></div>
+                <div><button id="roll_furtividade" class="dadinho" onclick="rollPericia(furtividade)"></button><label
+                        for="roll_furtividade">Furtividade
+                        <span>(Des)</span></label></div>
+                <div><button id="roll_historia" class="dadinho" onclick="rollPericia(historia)"></button><label
+                        for="roll_historia">Historia
+                        <span>(Int)</span></label></div>
+                <div><button id="roll_intimidacao" class="dadinho" onclick="rollPericia(intimidacao)"></button><label
+                        for="roll_intimidacao">Intimidação
+                        <span>(Car)</span></label></div>
+                <div><button id="roll_intuicao" class="dadinho" onclick="rollPericia(intuicao)"></button><label
+                        for="roll_intuicao">Intuição
+                        <span>(Sab)</span></label></div>
+                <div><button id="roll_investigacao" class="dadinho" onclick="rollPericia(investigacao)"></button><label
+                        for="roll_investigacao">Investigação
+                        <span>(Int)</span></label></div>
+                <div><button id="roll_lidar" class="dadinho" onclick="rollPericia(lidar_animais)"></button><label
+                        for="roll_lidar">Lidar com Animais
+                        <span>(Sab)</span></label></div>
+                <div><button id="roll_medicina" class="dadinho" onclick="rollPericia(medicina)"></button><label
+                        for="roll_medicina">Medicina
+                        <span>(Sab)</span></label></div>
+                <div><button id="roll_natureza" class="dadinho" onclick="rollPericia(natureza)"></button><label
+                        for="roll_natureza">Natureza
+                        <span>(Int)</span></label></div>
+                <div><button id="roll_percepcao" class="dadinho" onclick="rollPericia(percepcao)"></button><label
+                        for="roll_percepcao">Percepção
+                        <span>(Sab)</span></label></div>
+                <div><button id="roll_persuasao" class="dadinho" onclick="rollPericia(persuasao)"></button><label
+                        for="roll_persuasao">Persuasão
+                        <span>(Car)</span></label></div>
+                <div><button id="roll_prestidigitacao" class="dadinho"
+                        onclick="rollPericia(prestidigitacao)"></button><label
+                        for="roll_prestidigitacao">Prestidigitação
+                        <span>(Des)</span></label></div>
+                <div><button id="roll_religiao" class="dadinho" onclick="rollPericia(religiao)"></button><label
+                        for="roll_religiao">Religião
+                        <span>(Int)</span></label></div>
+                <div><button id="roll_sobrevivencia" class="dadinho"
+                        onclick="rollPericia(sobrevivencia)"></button><label for="roll_sobrevivencia">Sobrevivência
+                        <span>(Sab)</span></label></div>
+            </div>
         </div>
         <div>
 
@@ -138,19 +215,19 @@
 </html>
 <script>
 
-    window.onload = buscarPersonagensPorPlayer()
+    // window.onload = buscarPersonagensPorPlayer()
 
-    function buscarPersonagensPorPlayer() {
-        var personagens = JSON.parse(sessionStorage.PERSONAGENS);
-        personagens.forEach(item => {
-            document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
-            obterDadosGrafico(item.id)
-        });
+    // function buscarPersonagensPorPlayer() {
+    //     var personagens = JSON.parse(sessionStorage.PERSONAGENS);
+    //     personagens.forEach(item => {
+    //         document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
+    //         obterDadosGrafico(item.id)
+    //     });
 
-        if (personagens.length > 0) {
-            exibirAquario(personagens[0].id)
-        }
-    }
+    //     if (personagens.length > 0) {
+    //         exibirAquario(personagens[0].id)
+    //     }
+    // }
 
     function trocaPersonagem() {
         let valor = slct_personagem.value
@@ -159,10 +236,106 @@
             criar_ficha.open = true
         }
     }
-    function add() {
+    function criarPersonagem() {
         let nome = ipt_nome.value
+        let raca = ipt_raca.value
+        let classe = ipt_classe.value
 
-        slct_personagem.innerHTML += `<option id='0'>${nome}</option>`
+        let forca = Number(ipt_for.value)
+        let destreza = Number(ipt_dex.value)
+        let constituicao = Number(ipt_const.value)
+        let inteligencia = Number(ipt_int.value)
+        let sabedoria = Number(ipt_sab.value)
+        let carisma = Number(ipt_car.value)
+
+        let acrobacia = toTinyInt(chk_acrobacia)
+        let arcanismo = toTinyInt(chk_arcanismo)
+        let atletismo = toTinyInt(chk_atletismo)
+        let atuacao = toTinyInt(chk_atuacao)
+        let enganacao = toTinyInt(chk_enganacao)
+        let furtividade = toTinyInt(chk_furtividade)
+        let historia = toTinyInt(chk_historia)
+        let intimidacao = toTinyInt(chk_intimidacao)
+        let intuicao = toTinyInt(chk_intuicao)
+        let investicacao = toTinyInt(chk_investigacao)
+        let lidar = toTinyInt(chk_lidar)
+        let medicina = toTinyInt(chk_medicina)
+        let natureza = toTinyInt(chk_natureza)
+        let percepcao = toTinyInt(chk_percepcao)
+        let persuasao = toTinyInt(chk_persuasao)
+        let prestidigitacao = toTinyInt(chk_prestidigitacao)
+        let religiao = toTinyInt(chk_religiao)
+        let sobrevivencia = toTinyInt(chk_acrobacia)
+
+        let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
+
+        console.log(`Id do personagem criado: ${idPersonagem}`)
+        slct_personagem.innerHTML += `<option id='${idPersonagem}'>${nome}</option>`
         criar_ficha.open = false
     }
+
+    function toTinyInt(pericia){
+        if(pericia.checked == true){
+            return 1
+        } else {
+            return 0
+        }
+    }
+    function cadastrar(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28) {
+    // aguardar();
+
+    // Enviando o valor da nova input
+    fetch("/personagem/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idServer: t1,
+        nomeServer: t2,
+        racaServer: t3,
+        classeServer: t4,
+        forcaServer: t5,
+        destrezaServer: t6,
+        constituicaoServer: t7,
+        inteligenciaServer: t8,
+        sabedoriaServer: t9,
+        carismaServer: t10,
+        acrobaciaServer: t11,
+        lidarServer: t12,
+        arcanismoServer: t13,
+        atletismoServer: t14,
+        atuacaoServer: t15,
+        enganacaoServer: t16,
+        furtividadeServer: t17,
+        historiaServer: t18,
+        intimidacaoServer: t19,
+        intuicaoServer: t20,
+        investigacaoServer: t21,
+        medicinaServer: t22,
+        naturezaServer: t23,
+        percepcaoServer: t24,
+        persuasaoServer: t25,
+        prestidigitacaoServer: t26,
+        religiaoServer: t27,
+        sobrevivenciaServer: t28,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            console.log('Personagem cadastrado!')
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
 </script>

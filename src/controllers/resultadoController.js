@@ -40,6 +40,6 @@ function buscarUltimasRolagens(req, res) {
 // }
 
 module.exports = {
-    buscarUltimasMedidas,
+    buscarUltimasRolagens,
     // buscarMedidasEmTempoReal
 }

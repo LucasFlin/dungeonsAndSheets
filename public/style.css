@@ -9,6 +9,15 @@
     src: url("./fonte/handistry.ttf") format('truetype');
 }
 
+@keyframes rodar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 body{
     margin: 0px;
     height: 100vh;
@@ -218,15 +227,61 @@ body{
     height: 90px;
     width: 90px;
     border-radius: 10px;
-    border-style: solid;
+    border-style: none;
     border-width: 1px;
+    margin-bottom: 10px;
 }
 .dado:hover{
     cursor: pointer;
+    animation: rodar 0.2s ease;
+}
+
+
+.dadinho{
+    background: url(./img/d20.png) no-repeat center center/cover;
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
+    border-style: none;
+    border-width: 1px;
+}
+.dadinho:hover{
+    cursor: pointer;
+    animation: rodar 0.2s ease;
 }
 
 .atributos{
     display: flex;
     justify-content: space-evenly;
     width: 100vw;
+}
+
+.atributo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p{
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-family: "FonteHUD";
+    }
+}
+
+.pericias{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.caixa_atributos{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin: 15px;
+    border-width: 1px;
+    border-radius: 10px;
+    border-style: solid;
 }

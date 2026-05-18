@@ -28,7 +28,7 @@ function cadastrar(req, res) {
   } else {
 
 
-    personagemModel.cadastrar(playerId, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma)
+    personagemModel.cadastrar(playerId, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investigacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
       .then((resultado) => {
         res.status(201).json(resultado);
       }

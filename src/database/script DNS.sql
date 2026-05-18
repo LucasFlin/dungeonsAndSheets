@@ -84,4 +84,3 @@ fk_player int,
 constraint rolagens_player foreign key (fk_player) references usuarios(id_player),
 primary key(id, fk_player),
 dado int);
-dado int);

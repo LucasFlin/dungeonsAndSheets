@@ -3,7 +3,7 @@ var router = express.Router();
 
 var personagemController = require("../controllers/personagemController");
 
-router.get("/:empresaId", function (req, res) {
+router.get("/:playerId", function (req, res) {
   personagemController.buscarPersonagensPorPlayer(req, res);
 });
 
