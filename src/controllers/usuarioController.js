@@ -4,7 +4,7 @@ var personagemModel = require("../models/personagemModel");
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    var id = req.body.idServer
+    var playerId = req.body.idServer;
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
@@ -12,7 +12,7 @@ function autenticar(req, res) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
 
-        usuarioModel.autenticar(email, senha, id)
+        usuarioModel.autenticar(email, senha, playerId)
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);

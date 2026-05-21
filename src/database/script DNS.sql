@@ -58,8 +58,11 @@ bonus int);
 create index lista_habilidades on habilidades(fk_personagem);
 
 CREATE TABLE pericias (
-fk_personagem int primary key,
+fk_player int
+fk_personagem int,
+foreign key pericias(fk_player) references personagens(fk_player),
 foreign key pericias(fk_personagem) references personagens(id_personagem),
+primary key(fk_player, fk_personagem),
 acrobacia tinyint default 0,
 lidar_animais tinyint default 0,
 arcanismo tinyint default 0,
