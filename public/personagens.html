@@ -114,7 +114,7 @@
                     <option value="novo">Novo personagem...</option>
                 </select>
                 <div class="hp">
-                    <p id="numero_hp">12/12</p>
+                    <p id="numero_hp">--/--</p>
                     <div class="graf_vida">
                         <button>+</button> <progress id="barra_hp"></progress> <button>-</button>
                     </div>
@@ -125,27 +125,27 @@
             <div class="atributos">
                 <div class="atributo">
                     <p>Força</p>
-                    <button id="roll_forca" class="dado" onclick="roll(forc)">-1</button>
+                    <button id="roll_forca" class="dado" onclick="roll(forc)"></button>
                 </div>
                 <div class="atributo">
                     <p>Destreza</p>
-                    <button id="roll_des" class="dado" onclick="roll(des)">0</button>
+                    <button id="roll_des" class="dado" onclick="roll(des)"></button>
                 </div>
                 <div class="atributo">
                     <p>Constituição</p>
-                    <button id="roll_cons" class="dado" onclick="roll(cons)">+1</button>
+                    <button id="roll_cons" class="dado" onclick="roll(cons)"></button>
                 </div>
                 <div class="atributo">
                     <p>Inteligência</p>
-                    <button id="roll_int" class="dado" onclick="roll(intel)">+1</button>
+                    <button id="roll_int" class="dado" onclick="roll(intel)"></button>
                 </div>
                 <div class="atributo">
                     <p>Sabedoria</p>
-                    <button id="roll_sab" class="dado" onclick="roll(sab)">+2</button>
+                    <button id="roll_sab" class="dado" onclick="roll(sab)"></button>
                 </div>
                 <div class="atributo">
                     <p>Carisma</p>
-                    <button id="roll_car" class="dado" onclick="roll(car)">+2</button>
+                    <button id="roll_car" class="dado" onclick="roll(car)"></button>
                 </div>
             </div>
             <div class="pericias">
@@ -215,25 +215,111 @@
 </html>
 <script>
 
-    // window.onload = buscarPersonagensPorPlayer()
+    window.onload = exibirPersonagensPorPlayer()
 
-    // function buscarPersonagensPorPlayer() {
-    //     var personagens = JSON.parse(sessionStorage.PERSONAGENS);
-    //     personagens.forEach(item => {
-    //         document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
-    //         obterDadosGrafico(item.id)
-    //     });
+    let idPersonagemAtual = 0
 
-    //     if (personagens.length > 0) {
-    //         exibirAquario(personagens[0].id)
-    //     }
-    // }
+    let hpTPersonagem = 0
+    let hpAPersonagem = 0
+
+    let forcaPersonagem = 0
+    let destrezaPersonagem = 0
+    let constituicaoPersonagem = 0
+    let inteligenciaPersonagem = 0
+    let sabedoriaPersonagem = 0
+    let carismaPersonagem = 0
+
+    let acrobaciaPersonagem = false
+    let arcanismoPersonagem = false
+    let atletismoPersonagem = false
+    let atuacaoPersonagem = false
+    let enganacaoPersonagem = false
+    let furtividadePersonagem = false
+    let historiaPersonagem = false
+    let intimidacaoPersonagem = false
+    let intuicaoPersonagem = false
+    let investicacaoPersonagem = false
+    let lidarPersonagem = false
+    let medicinaPersonagem = false
+    let naturezaPersonagem = false
+    let percepcaoPersonagem = false
+    let persuasaoPersonagem = false
+    let prestidigitacaoPersonagem = false
+    let religiaoPersonagem = false
+    let sobrevivenciaPersonagem = false
+
+    function exibirPersonagensPorPlayer() {
+        var personagens = JSON.parse(sessionStorage.PERSONAGENS);
+        let pula = false
+        personagens.forEach(item => {
+                document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
+                // obterDadosGrafico(item.id)
+        });
+
+        if (personagens.length > 0) {
+            // exibirAquario(personagens[0].id)
+        }
+    }
 
     function trocaPersonagem() {
         let valor = slct_personagem.value
+        let idPersonagemAtual = valor
+        var personagens = JSON.parse(sessionStorage.PERSONAGENS);
+        console.log(slct_personagem.value)
 
         if (valor == 'novo') {
             criar_ficha.open = true
+        } else {
+            personagens.forEach(json => {
+                if (json.nome = slct_personagem.value){
+                    let forcaPersonagem = 0
+
+                    hpTPersonagem = Number(json.hp_total)
+                    hpAPersonagem = Number(json.hp_atual)
+
+                    forcaPersonagem = Number(json.forc)
+                    bonusFor = Math.floor(forcaPersonagem/2)-5
+                    destrezaPersonagem = Number(json.des)
+                    bonusDes = Math.floor(destrezaPersonagem/2)-5
+                    constituicaoPersonagem = Number(json.cons)
+                    bonusCons = Math.floor(constituicaoPersonagem/2)-5
+                    inteligenciaPersonagem = Number(json.intel)
+                    bonusInt = Math.floor(inteligenciaPersonagem/2)-5
+                    sabedoriaPersonagem = Number(json.sab)
+                    bonusSab = Math.floor(sabedoriaPersonagem/2)-5
+                    carismaPersonagem = Number(json.car)
+                    bonusCar = Math.floor(carismaPersonagem/2)-5
+
+                    acrobaciaPersonagem = fromTinyInt(json.acrobacia)
+                    arcanismoPersonagem = fromTinyInt(json.arcanismo)
+                    atletismoPersonagem = fromTinyInt(json.atletismo)
+                    atuacaoPersonagem = fromTinyInt(json.atuacao)
+                    enganacaoPersonagem = fromTinyInt(json.blefar)
+                    furtividadePersonagem = fromTinyInt(json.furtividade)
+                    historiaPersonagem = fromTinyInt(json.historia)
+                    intimidacaoPersonagem = fromTinyInt(json.intimidacao)
+                    intuicaoPersonagem = fromTinyInt(json.intuicao)
+                    investicacaoPersonagem = fromTinyInt(json.investigacao)
+                    lidarPersonagem = fromTinyInt(json.lidar_animais)
+                    medicinaPersonagem = fromTinyInt(json.medicina)
+                    naturezaPersonagem = fromTinyInt(json.natureza)
+                    percepcaoPersonagem = fromTinyInt(json.percepcao)
+                    persuasaoPersonagem = fromTinyInt(json.persuasao)
+                    prestidigitacaoPersonagem = fromTinyInt(json.prestidigitacao)
+                    religiaoPersonagem = fromTinyInt(json.religiao)
+                    sobrevivenciaPersonagem = fromTinyInt(json.sobrevivencia)
+
+                    barra_hp.value = hpAPersonagem
+                    barra_hp.max = hpTPersonagem
+                    roll_forca.innerHTML = bonusFor
+                    roll_des.innerHTML = bonusDes
+                    roll_cons.innerHTML = bonusCons
+                    roll_int.innerHTML = bonusInt
+                    roll_sab.innerHTML = bonusSab
+                    roll_car.innerHTML = bonusCar
+                    numero_hp.innerHTML = `${hpAPersonagem}/${hpTPersonagem}`
+                }
+            })
         }
     }
     function criarPersonagem() {
@@ -266,7 +352,7 @@
         let prestidigitacao = toTinyInt(chk_prestidigitacao)
         let religiao = toTinyInt(chk_religiao)
         let sobrevivencia = toTinyInt(chk_acrobacia)
-        
+
         let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
 
         console.log(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
@@ -276,68 +362,77 @@
         criar_ficha.open = false
     }
 
-    function toTinyInt(pericia){
-        if(pericia.checked == true){
+    function toTinyInt(pericia) {
+        if (pericia.checked == true) {
             return 1
         } else {
             return 0
         }
     }
-    function cadastrar(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28) {
-    // aguardar();
 
-    // Enviando o valor da nova input
-    fetch("/personagem/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        idServer: t1,
-        nomeServer: t2,
-        racaServer: t3,
-        classeServer: t4,
-        forcaServer: t5,
-        destrezaServer: t6,
-        constituicaoServer: t7,
-        inteligenciaServer: t8,
-        sabedoriaServer: t9,
-        carismaServer: t10,
-        acrobaciaServer: t11,
-        lidarServer: t12,
-        arcanismoServer: t13,
-        atletismoServer: t14,
-        atuacaoServer: t15,
-        enganacaoServer: t16,
-        furtividadeServer: t17,
-        historiaServer: t18,
-        intimidacaoServer: t19,
-        intuicaoServer: t20,
-        investigacaoServer: t21,
-        medicinaServer: t22,
-        naturezaServer: t23,
-        percepcaoServer: t24,
-        persuasaoServer: t25,
-        prestidigitacaoServer: t26,
-        religiaoServer: t27,
-        sobrevivenciaServer: t28,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-            console.log('Personagem cadastrado!')
+    function fromTinyInt(pericia) {
+        if (pericia == 1) {
+            return true
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+            return false
         }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+    }
 
-    return false;
-  }
+    function cadastrar(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28) {
+        // aguardar();
+
+        // Enviando o valor da nova input
+        fetch("/personagem/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                idServer: t1,
+                nomeServer: t2,
+                racaServer: t3,
+                classeServer: t4,
+                forcaServer: t5,
+                destrezaServer: t6,
+                constituicaoServer: t7,
+                inteligenciaServer: t8,
+                sabedoriaServer: t9,
+                carismaServer: t10,
+                acrobaciaServer: t11,
+                lidarServer: t12,
+                arcanismoServer: t13,
+                atletismoServer: t14,
+                atuacaoServer: t15,
+                enganacaoServer: t16,
+                furtividadeServer: t17,
+                historiaServer: t18,
+                intimidacaoServer: t19,
+                intuicaoServer: t20,
+                investigacaoServer: t21,
+                medicinaServer: t22,
+                naturezaServer: t23,
+                percepcaoServer: t24,
+                persuasaoServer: t25,
+                prestidigitacaoServer: t26,
+                religiaoServer: t27,
+                sobrevivenciaServer: t28,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    console.log('Personagem cadastrado!')
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
 </script>

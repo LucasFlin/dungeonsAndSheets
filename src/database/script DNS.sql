@@ -24,6 +24,8 @@ cons int not null,
 intel int not null,
 sab int not null,
 car int not null,
+hp_total int,
+hp_atual int,
 criado_em datetime default current_timestamp(),
 modificado_em datetime default current_timestamp() on update current_timestamp());
 create index lista_jogador on personagens(fk_player);

@@ -68,6 +68,7 @@ Após olhar a folha ela te entrega novamente dizendo:
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id_player;
+                    sessionStorage.PERSONAGENS = JSON.stringify(json.personagens)
 
                     setTimeout(function () {
                         window.location = "./personagens.html";

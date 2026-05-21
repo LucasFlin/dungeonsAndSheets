@@ -9,6 +9,9 @@ router.get("/:playerId", function (req, res) {
 
 router.post("/cadastrar", function (req, res) {
   personagemController.cadastrar(req, res);
+});
+router.get("/buscarAtributos", function (req, res) {
+  personagemController.buscarAtributos(req, res);
 })
 
 module.exports = router;

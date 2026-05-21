@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarPersonagensPorPlayer(playerId) {
 
-  var instrucaoSql = `SELECT * FROM personagens WHERE fk_player = ${playerId}`;
+  var instrucaoSql = `SELECT * FROM personagens p join pericias on fk_personagem = id_personagem WHERE p.fk_player = ${playerId}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -22,8 +22,18 @@ function cadastrar(playerId, nome, raca, classe, forca, destreza, constituicao, 
   return 
 }
 
+function buscarAtributos(id){
+var instrucaoAtributo = `SELECT forc, des, cons, intel, sab, car, hp_total, hp_atual FROM personagens WHERE id_personagem = ${personagemId}`
+var instrucaoPericias = `SELECT acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investigacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia from pericias where fk_personagem = ${id}`
 
+console.log("Executando a instrução SQL: \n" + instrucaoAtributo);
+  database.executar(instrucaoAtributo)
+console.log("Executando a instrução SQL: \n" + instrucaoPericias);
+database.executar(instrucaoPericias)
+return
+}
 module.exports = {
   buscarPersonagensPorPlayer,
+  buscarAtributos,
   cadastrar
 }
