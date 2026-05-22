@@ -20,26 +20,26 @@ function buscarUltimasRolagens(req, res) {
 }
 
 
-// function buscarMedidasEmTempoReal(req, res) {
+function buscarKpis(req, res) {
 
-//     var idAquario = req.params.idAquario;
+    var id_player = req.params.id_player;
 
-//     console.log(`Recuperando medidas em tempo real`);
+    console.log(`Recuperando medidas em tempo real`);
 
-//     medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
-//         if (resultado.length > 0) {
-//             res.status(200).json(resultado);
-//         } else {
-//             res.status(204).send("Nenhum resultado encontrado!")
-//         }
-//     }).catch(function (erro) {
-//         console.log(erro);
-//         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-//         res.status(500).json(erro.sqlMessage);
-//     });
-// }
+    medidaModel.buscarKpis(id_player).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 module.exports = {
     buscarUltimasRolagens,
-    // buscarMedidasEmTempoReal
+    buscarKpis
 }

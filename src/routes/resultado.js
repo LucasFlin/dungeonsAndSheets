@@ -3,12 +3,12 @@ var router = express.Router();
 
 var resultadoController = require("../controllers/resultadoController");
 
-router.get("/ultimas/:idAquario", function (req, res) {
+router.get("/ultimas/:id_player", function (req, res) {
     resultadoController.buscarUltimasRolagens(req, res);
 });
 
-router.get("/tempo-real/:idAquario", function (req, res) {
-    resultadoController.buscarRolagensEmTempoReal(req, res);
+router.get("/tempo-real/:id_player", function (req, res) {
+    resultadoController.buscarKpis(req, res);
 })
 
 module.exports = router;

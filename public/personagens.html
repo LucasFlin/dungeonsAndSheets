@@ -223,11 +223,17 @@
     let hpAPersonagem = 0
 
     let forcaPersonagem = 0
+    let bonusFor = 0
     let destrezaPersonagem = 0
+    let bonusDes = 0
     let constituicaoPersonagem = 0
+    let bonusCons = 0
     let inteligenciaPersonagem = 0
+    let bonusInt = 0
     let sabedoriaPersonagem = 0
+    let bonusSab = 0
     let carismaPersonagem = 0
+    let bonusCar = 0
 
     let acrobaciaPersonagem = false
     let arcanismoPersonagem = false
@@ -252,8 +258,8 @@
         var personagens = JSON.parse(sessionStorage.PERSONAGENS);
         let pula = false
         personagens.forEach(item => {
-                document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
-                // obterDadosGrafico(item.id)
+            document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
+            // obterDadosGrafico(item.id)
         });
 
         if (personagens.length > 0) {
@@ -271,24 +277,24 @@
             criar_ficha.open = true
         } else {
             personagens.forEach(json => {
-                if (json.nome = slct_personagem.value){
+                if (json.nome = slct_personagem.value) {
                     let forcaPersonagem = 0
 
                     hpTPersonagem = Number(json.hp_total)
                     hpAPersonagem = Number(json.hp_atual)
 
                     forcaPersonagem = Number(json.forc)
-                    bonusFor = Math.floor(forcaPersonagem/2)-5
+                    bonusFor = Math.floor(forcaPersonagem / 2) - 5
                     destrezaPersonagem = Number(json.des)
-                    bonusDes = Math.floor(destrezaPersonagem/2)-5
+                    bonusDes = Math.floor(destrezaPersonagem / 2) - 5
                     constituicaoPersonagem = Number(json.cons)
-                    bonusCons = Math.floor(constituicaoPersonagem/2)-5
+                    bonusCons = Math.floor(constituicaoPersonagem / 2) - 5
                     inteligenciaPersonagem = Number(json.intel)
-                    bonusInt = Math.floor(inteligenciaPersonagem/2)-5
+                    bonusInt = Math.floor(inteligenciaPersonagem / 2) - 5
                     sabedoriaPersonagem = Number(json.sab)
-                    bonusSab = Math.floor(sabedoriaPersonagem/2)-5
+                    bonusSab = Math.floor(sabedoriaPersonagem / 2) - 5
                     carismaPersonagem = Number(json.car)
-                    bonusCar = Math.floor(carismaPersonagem/2)-5
+                    bonusCar = Math.floor(carismaPersonagem / 2) - 5
 
                     acrobaciaPersonagem = fromTinyInt(json.acrobacia)
                     arcanismoPersonagem = fromTinyInt(json.arcanismo)
@@ -311,12 +317,12 @@
 
                     barra_hp.value = hpAPersonagem
                     barra_hp.max = hpTPersonagem
-                    roll_forca.innerHTML = bonusFor
-                    roll_des.innerHTML = bonusDes
-                    roll_cons.innerHTML = bonusCons
-                    roll_int.innerHTML = bonusInt
-                    roll_sab.innerHTML = bonusSab
-                    roll_car.innerHTML = bonusCar
+                    roll_forca.innerHTML = formatoBonus(bonusFor)
+                    roll_des.innerHTML = formatoBonus(bonusDes)
+                    roll_cons.innerHTML = formatoBonus(bonusCons)
+                    roll_int.innerHTML = formatoBonus(bonusInt)
+                    roll_sab.innerHTML = formatoBonus(bonusSab)
+                    roll_car.innerHTML = formatoBonus(bonusCar)
                     numero_hp.innerHTML = `${hpAPersonagem}/${hpTPersonagem}`
                 }
             })
@@ -434,5 +440,13 @@
             });
 
         return false;
+    }
+
+    function formatoBonus(bonus){
+        if (bonus > 0){
+            return `+${bonus}`
+        } else {
+            return bonus
+        }
     }
 </script>
