@@ -272,8 +272,10 @@
         var personagens = JSON.parse(sessionStorage.PERSONAGENS);
         let pula = false
         personagens.forEach(item => {
+            if (item.nome != ''){
             document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
             // obterDadosGrafico(item.id)
+            }
         });
 
         if (personagens.length > 0) {
@@ -347,30 +349,30 @@
         let raca = ipt_raca.value
         let classe = ipt_classe.value
 
-        let forca = Number(ipt_for.value)
-        let bonusFor = bonus(forca)
-        let destreza = Number(ipt_dex.value)
-        let bonusDes = bonus(destreza)
-        let constituicao = Number(ipt_const.value)
-        let bonusCon = bonus(constituicao)
-        let inteligencia = Number(ipt_int.value)
-        let bonusInt = bonus(inteligencia)
-        let sabedoria = Number(ipt_sab.value)
-        let bonusSab = bonus(sabedoria)
-        let carisma = Number(ipt_car.value)
-        let bonusCar = bonus(carisma)
+        let forc = Number(ipt_for.value)
+        let bonusFor = bonus(forc)
+        let des = Number(ipt_dex.value)
+        let bonusDes = bonus(des)
+        let cons = Number(ipt_const.value)
+        let bonusCon = bonus(cons)
+        let intel = Number(ipt_int.value)
+        let bonusInt = bonus(intel)
+        let sab = Number(ipt_sab.value)
+        let bonusSab = bonus(sab)
+        let car = Number(ipt_car.value)
+        let bonusCar = bonus(car)
 
         let acrobacia = toTinyInt(chk_acrobacia)
         let arcanismo = toTinyInt(chk_arcanismo)
         let atletismo = toTinyInt(chk_atletismo)
         let atuacao = toTinyInt(chk_atuacao)
-        let enganacao = toTinyInt(chk_enganacao)
+        let blefar = toTinyInt(chk_enganacao)
         let furtividade = toTinyInt(chk_furtividade)
         let historia = toTinyInt(chk_historia)
         let intimidacao = toTinyInt(chk_intimidacao)
         let intuicao = toTinyInt(chk_intuicao)
         let investicacao = toTinyInt(chk_investigacao)
-        let lidar = toTinyInt(chk_lidar)
+        let lidar_animais = toTinyInt(chk_lidar)
         let medicina = toTinyInt(chk_medicina)
         let natureza = toTinyInt(chk_natureza)
         let percepcao = toTinyInt(chk_percepcao)
@@ -380,7 +382,7 @@
         let sobrevivencia = toTinyInt(chk_sobrevivencia)
 
         let hp_total = 0
-        let bonusHp = Math.floor(constituicao / 2) - 5
+        let bonusHp = Math.floor(cons / 2) - 5
         let hp_atual = 0
 
         console.log(bonusHp)
@@ -403,9 +405,48 @@
             hp_total = Number(hp_total)
             hp_atual = Number(hp_total)
         }
-        let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, hp_total, hp_atual)
+        let placeholder = {
+            "acrobacia": acrobacia,
+            "arcanismo": arcanismo,
+            "atletismo": atletismo,
+            "atuacao": atuacao,
+            "blefar": blefar,
+            "car": car,
+            "classe": classe,
+            "cons": cons,
+            "criado_em": "2000-01-01T02:00:00.000Z",
+            "des": des,
+            "fk_personagem": 200,
+            "fk_player": sessionStorage.ID_USUARIO,
+            "forc": forc,
+            "furtividade": furtividade,
+            "historia": historia,
+            "hp_atual": hp_atual,
+            "hp_total": hp_total,
+            "id_personagem": 200,
+            "intel": intel,
+            "intimidacao": intimidacao,
+            "intuicao": intuicao,
+            "investigacao": investicacao,
+            "lidar_animais": lidar_animais,
+            "medicina": medicina,
+            "modificado_em": "2000-01-01T02:00:00.000Z",
+            "natureza": natureza,
+            "nome": nome,
+            "percepcao": percepcao,
+            "persuasao": persuasao,
+            "prestidigitacao": prestidigitacao,
+            "raca": raca,
+            "religiao": religiao,
+            "sab": sab,
+            "sobrevivencia": sobrevivencia
+        }
+        
+        sessionStorage.PERSONAGENS[sessionStorage.PERSONAGENS.length] += placeholder
 
-        console.log(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, sobrevivencia, hp_atual)
+        let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forc, des, cons, intel, sab, car, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, hp_total, hp_atual)
+
+        console.log(sessionStorage.ID_USUARIO, nome, raca, classe, forc, des, cons, intel, sab, car, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, sobrevivencia, hp_atual)
 
         console.log(`Id do personagem criado: ${idPersonagem}`)
         slct_personagem.innerHTML += `<option id='${idPersonagem}'>${nome}</option>`

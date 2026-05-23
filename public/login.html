@@ -70,9 +70,7 @@ Após olhar a folha ela te entrega novamente dizendo:
                     sessionStorage.ID_USUARIO = json.id_player;
                     sessionStorage.PERSONAGENS = JSON.stringify(json.personagens)
 
-                    setTimeout(function () {
-                        window.location = "./personagens.html";
-                    }, 1000); // apenas para exibir o loading
+                    window.location = "./personagens.html"
 
                 });
 

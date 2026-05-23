@@ -5,7 +5,7 @@ create table usuarios (
 id_player int primary key auto_increment,
 nome varchar(100) not null,
 email varchar (100) not null,
-senha varchar (50) not null,
+senha varchar (256) not null,
 criado_em datetime default current_timestamp(),
 atualisado_em datetime default current_timestamp on update current_timestamp());
 

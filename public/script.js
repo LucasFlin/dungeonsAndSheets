@@ -111,5 +111,7 @@ Alguns segundos se passam e ela guarda a folha abaixo do balcão enquanto olha p
 
 Ela diz:
 "Calma aí viajante, `
+
+    window.location = "./login.html"
 }
 
