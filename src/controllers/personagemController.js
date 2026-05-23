@@ -16,6 +16,30 @@ function buscarPersonagensPorPlayer(req, res) {
   });
 }
 
+function atualizarVida(req, res){
+  var playerId = req.body.idServer;
+  var nome = req.body.nomeServer
+  var hp_atual = req.body.hp_atualServer
+
+  if (playerId == undefined) {
+    res.status(400).send("idUsuario está undefined!");
+  } else {
+
+
+    personagemModel.atualizarVida(playerId, nome, hp_atual)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
 
 function cadastrar(req, res) {
   var playerId = req.body.idServer;
@@ -46,6 +70,8 @@ function cadastrar(req, res) {
   var prestidigitacao = req.body.prestidigitacaoServer;
   var religiao = req.body.religiaoServer;
   var sobrevivencia = req.body.sobrevivenciaServer;
+  var hp_total = req.body.hp_totalServer;
+  var hp_atual = req.body.hp_atualServer;
 
 
   if (playerId == undefined) {
@@ -53,7 +79,7 @@ function cadastrar(req, res) {
   } else {
 
 
-    personagemModel.cadastrar(playerId, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investigacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
+    personagemModel.cadastrar(playerId, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investigacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, hp_total, hp_atual)
       .then((resultado) => {
         res.status(201).json(resultado);
       }
@@ -68,8 +94,8 @@ function cadastrar(req, res) {
   }
 }
 
-function buscarAtributos(req, res){
-    var idPersonagem = req.script.idPersonagemAtual;
+function buscarAtributos(req, res) {
+  var idPersonagem = req.script.idPersonagemAtual;
 
   personagemModel.buscarAtributos(idPersonagem).then((resultado) => {
     if (resultado.length > 0) {
@@ -87,5 +113,6 @@ function buscarAtributos(req, res){
 module.exports = {
   buscarPersonagensPorPlayer,
   buscarAtributos,
+  atualizarVida,
   cadastrar
 }

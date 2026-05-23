@@ -7,7 +7,7 @@ router.get("/ultimas/:id_player", function (req, res) {
     resultadoController.buscarUltimasRolagens(req, res);
 });
 
-router.get("/tempo-real/:id_player", function (req, res) {
+router.get("/kpis/:id_player", function (req, res) {
     resultadoController.buscarKpis(req, res);
 })
 

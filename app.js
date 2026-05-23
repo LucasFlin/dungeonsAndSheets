@@ -31,7 +31,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
-app.use("/medidas", resultadosRouter);
+app.use("/resultado", resultadosRouter);
 app.use("/personagem", personagensRouter);
 app.use("/empresas", empresasRouter);
 

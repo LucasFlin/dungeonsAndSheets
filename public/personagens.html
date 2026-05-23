@@ -37,7 +37,20 @@
                     </div>
                     <div class="ficha-input">
                         <span>Classe:</span>
-                        <input type="text" id="ipt_classe">
+                        <select id="ipt_classe">
+                            <option value="guerreiro">Guerreiro</option>
+                            <option value="ladino">Ladino</option>
+                            <option value="mago">Mago</option>
+                            <option value="bruxo">Bruxo</option>
+                            <option value="druida">Druida</option>
+                            <option value="feiticeiro">Feiticeiro</option>
+                            <option value="paladino">Paladino</option>
+                            <option value="clerigo">Clérigo</option>
+                            <option value="barbaro">Barbaro</option>
+                            <option value="bardo">Bardo</option>
+                            <option value="monge">Monge</option>
+                            <option value="patrulheiro">Patrulheiro</option>
+                        </select>
                     </div>
                 </div>
                 <div>
@@ -52,7 +65,7 @@
                         </div>
                         <div>
                             <input type="number" id="ipt_const">
-                            <div id="div_const">0</div>
+                            <div id="div_con">0</div>
                         </div>
                         <div>
                             <input type="number" id="ipt_int">
@@ -116,7 +129,8 @@
                 <div class="hp">
                     <p id="numero_hp">--/--</p>
                     <div class="graf_vida">
-                        <button>+</button> <progress id="barra_hp"></progress> <button>-</button>
+                        <button onclick="vida(-1)">-</button> <progress id="barra_hp"></progress> <button
+                            onclick="vida(+1)">+</button>
                     </div>
                 </div>
             </div>
@@ -272,29 +286,29 @@
         let idPersonagemAtual = valor
         var personagens = JSON.parse(sessionStorage.PERSONAGENS);
         console.log(slct_personagem.value)
-
+        console.log(personagens)
         if (valor == 'novo') {
             criar_ficha.open = true
         } else {
             personagens.forEach(json => {
-                if (json.nome = slct_personagem.value) {
+                if (json.nome == slct_personagem.value) {
                     let forcaPersonagem = 0
-
+                    console.log(json.nome, slct_personagem.value)
                     hpTPersonagem = Number(json.hp_total)
                     hpAPersonagem = Number(json.hp_atual)
 
                     forcaPersonagem = Number(json.forc)
-                    bonusFor = Math.floor(forcaPersonagem / 2) - 5
+                    bonusFor = bonus(forcaPersonagem)
                     destrezaPersonagem = Number(json.des)
-                    bonusDes = Math.floor(destrezaPersonagem / 2) - 5
+                    bonusDes = bonus(destrezaPersonagem)
                     constituicaoPersonagem = Number(json.cons)
-                    bonusCons = Math.floor(constituicaoPersonagem / 2) - 5
+                    bonusCons = bonus(constituicaoPersonagem)
                     inteligenciaPersonagem = Number(json.intel)
-                    bonusInt = Math.floor(inteligenciaPersonagem / 2) - 5
+                    bonusInt = bonus(inteligenciaPersonagem)
                     sabedoriaPersonagem = Number(json.sab)
-                    bonusSab = Math.floor(sabedoriaPersonagem / 2) - 5
+                    bonusSab = bonus(sabedoriaPersonagem)
                     carismaPersonagem = Number(json.car)
-                    bonusCar = Math.floor(carismaPersonagem / 2) - 5
+                    bonusCar = bonus(carismaPersonagem)
 
                     acrobaciaPersonagem = fromTinyInt(json.acrobacia)
                     arcanismoPersonagem = fromTinyInt(json.arcanismo)
@@ -317,12 +331,12 @@
 
                     barra_hp.value = hpAPersonagem
                     barra_hp.max = hpTPersonagem
-                    roll_forca.innerHTML = formatoBonus(bonusFor)
-                    roll_des.innerHTML = formatoBonus(bonusDes)
-                    roll_cons.innerHTML = formatoBonus(bonusCons)
-                    roll_int.innerHTML = formatoBonus(bonusInt)
-                    roll_sab.innerHTML = formatoBonus(bonusSab)
-                    roll_car.innerHTML = formatoBonus(bonusCar)
+                    roll_forca.innerHTML = bonusFor
+                    roll_des.innerHTML = bonusDes
+                    roll_cons.innerHTML = bonusCons
+                    roll_int.innerHTML = bonusInt
+                    roll_sab.innerHTML = bonusSab
+                    roll_car.innerHTML = bonusCar
                     numero_hp.innerHTML = `${hpAPersonagem}/${hpTPersonagem}`
                 }
             })
@@ -334,11 +348,17 @@
         let classe = ipt_classe.value
 
         let forca = Number(ipt_for.value)
+        let bonusFor = bonus(forca)
         let destreza = Number(ipt_dex.value)
+        let bonusDes = bonus(destreza)
         let constituicao = Number(ipt_const.value)
+        let bonusCon = bonus(constituicao)
         let inteligencia = Number(ipt_int.value)
+        let bonusInt = bonus(inteligencia)
         let sabedoria = Number(ipt_sab.value)
+        let bonusSab = bonus(sabedoria)
         let carisma = Number(ipt_car.value)
+        let bonusCar = bonus(carisma)
 
         let acrobacia = toTinyInt(chk_acrobacia)
         let arcanismo = toTinyInt(chk_arcanismo)
@@ -357,11 +377,35 @@
         let persuasao = toTinyInt(chk_persuasao)
         let prestidigitacao = toTinyInt(chk_prestidigitacao)
         let religiao = toTinyInt(chk_religiao)
-        let sobrevivencia = toTinyInt(chk_acrobacia)
+        let sobrevivencia = toTinyInt(chk_sobrevivencia)
 
-        let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
+        let hp_total = 0
+        let bonusHp = Math.floor(constituicao / 2) - 5
+        let hp_atual = 0
 
-        console.log(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia)
+        console.log(bonusHp)
+
+        if (classe == 'barbaro') {
+            hp_total = 12 + bonusHp
+            hp_total = Number(hp_total)
+            hp_atual = Number(hp_total)
+
+        } else if (classe == 'patrulheiro' || classe == 'paladino' || classe == 'guerreiro') {
+            hp_total = 10 + bonusHp
+            hp_total = Number(hp_total)
+            hp_atual = Number(hp_total)
+        } else if (classe == 'mago' || classe == 'feiticeiro') {
+            hp_total = 6 + bonusHp
+            hp_total = Number(hp_total)
+            hp_atual = Number(hp_total)
+        } else {
+            hp_total = 8 + bonusHp
+            hp_total = Number(hp_total)
+            hp_atual = Number(hp_total)
+        }
+        let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, hp_total, hp_atual)
+
+        console.log(sessionStorage.ID_USUARIO, nome, raca, classe, forca, destreza, constituicao, inteligencia, sabedoria, carisma, acrobacia, lidar, arcanismo, atletismo, atuacao, enganacao, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, sobrevivencia, hp_atual)
 
         console.log(`Id do personagem criado: ${idPersonagem}`)
         slct_personagem.innerHTML += `<option id='${idPersonagem}'>${nome}</option>`
@@ -384,7 +428,7 @@
         }
     }
 
-    function cadastrar(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28) {
+    function cadastrar(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30) {
         // aguardar();
 
         // Enviando o valor da nova input
@@ -424,6 +468,8 @@
                 prestidigitacaoServer: t26,
                 religiaoServer: t27,
                 sobrevivenciaServer: t28,
+                hp_totalServer: t29,
+                hp_atualServer: t30,
             }),
         })
             .then(function (resposta) {
@@ -438,15 +484,53 @@
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
-
-        return false;
+            exibirPersonagensPorPlayer()
     }
 
-    function formatoBonus(bonus){
-        if (bonus > 0){
+    function bonus(atributo) {
+        let bonus = Math.floor(atributo / 2) - 5
+
+        if (bonus > 0) {
             return `+${bonus}`
         } else {
             return bonus
         }
+    }
+
+    function vida(operacao) {
+        hpAPersonagem = hpAPersonagem + operacao
+        if (hpAPersonagem > hpTPersonagem) {
+            hpAPersonagem -= 1
+        } else {
+            barra_hp.value = hpAPersonagem
+            numero_hp.innerHTML = `${hpAPersonagem}/${hpTPersonagem}`
+            atualizarVida(sessionStorage.ID_USUARIO, slct_personagem.value, hpAPersonagem)
+        }
+    }
+
+    function atualizarVida (id, nome, vida){
+        fetch("/personagem/atualizarVida", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idServer: id,
+                nomeServer: nome,
+                hp_atualServer: vida
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    console.log('Vida atualizada!')
+                } else {
+                    throw "Houve um erro ao tentar atualizar!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
     }
 </script>

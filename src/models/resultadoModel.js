@@ -1,12 +1,12 @@
 var database = require("../database/config");
 
-function buscarUltimasRolagens(id_player) {
+function buscarUltimasRolagens(playerId) {
 
     var instrucaoSql = `SELECT 
                     r.dado, p.nome    
                     FROM resultados r join personagens p on r.fk_personagem = p.id_personagem
                     join usuarios u on r.fk_player = u.id_player
-                    where r.fk_player = ${id_player}
+                    where r.fk_player = ${playerId}
                     ORDER BY r.data_rolagem DESC
                     LIMIT 10`;
 

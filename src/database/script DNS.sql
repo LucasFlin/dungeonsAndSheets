@@ -58,29 +58,29 @@ bonus int);
 create index lista_habilidades on habilidades(fk_personagem);
 
 CREATE TABLE pericias (
-fk_player int
+fk_player int,
 fk_personagem int,
 foreign key pericias(fk_player) references personagens(fk_player),
 foreign key pericias(fk_personagem) references personagens(id_personagem),
 primary key(fk_player, fk_personagem),
-acrobacia tinyint default 0,
-lidar_animais tinyint default 0,
-arcanismo tinyint default 0,
-atletismo tinyint default 0,
-atuacao tinyint default 0,
-blefar tinyint default 0,
-furtividade tinyint default 0,
-historia tinyint default 0,
-intimidacao tinyint default 0,
-intuicao tinyint default 0,
-investigacao tinyint default 0,
-medicina tinyint default 0,
-natureza tinyint default 0,
-percepcao tinyint default 0,
-persuasao tinyint default 0,
-prestidigitacao tinyint default 0,
-religiao tinyint default 0,
-sobrevivencia tinyint default 0);
+acrobacia tinyint(1) default 0,
+lidar_animais tinyint(1) default 0,
+arcanismo tinyint(1) default 0,
+atletismo tinyint(1) default 0,
+atuacao tinyint(1) default 0,
+blefar tinyint(1) default 0,
+furtividade tinyint(1) default 0,
+historia tinyint(1) default 0,
+intimidacao tinyint(1) default 0,
+intuicao tinyint(1) default 0,
+investigacao tinyint(1) default 0,
+medicina tinyint(1) default 0,
+natureza tinyint(1) default 0,
+percepcao tinyint(1) default 0,
+persuasao tinyint(1) default 0,
+prestidigitacao tinyint(1) default 0,
+religiao tinyint(1) default 0,
+sobrevivencia tinyint(1) default 0);
 create index lista_pericias on pericias(fk_personagem);
 
 create table resultados (
@@ -88,4 +88,7 @@ id int auto_increment,
 fk_player int,
 constraint rolagens_player foreign key (fk_player) references usuarios(id_player),
 primary key(id, fk_player),
-dado int);
+dado int,
+fk_personagem int,
+constraint rolagens_personagem foreign key (fk_personagem) references personagens(id_personagem),
+data_rolagem datetime default current_timestamp());
