@@ -28,7 +28,14 @@ function buscarKpis(id_player) {
     return database.executar(instrucaoSql);
 }
 
+function adicionarDado(id, nome, dado){
+    var instrucaoDado = `insert into resultados (fk_player, fk_personagem, dado) value (${2}, (select id_personagem from personagens where fk_player = ${id} and nome = '${nome}'), ${dado})`
+    console.log("Executando a instrução SQL: \n" + instrucaoDado);
+    return database.executar(instrucaoDado);
+}
+
 module.exports = {
     buscarUltimasRolagens,
+    adicionarDado,
     buscarKpis
 }

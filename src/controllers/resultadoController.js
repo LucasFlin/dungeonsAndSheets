@@ -19,6 +19,23 @@ function buscarUltimasRolagens(req, res) {
     });
 }
 
+function adicionarDado(req, res){
+    var id_player = req.body.idServer
+    var nome = req.body.nomeServer
+    var dado = req.body.dadoServer
+
+    medidaModel.adicionarDado(id_player, nome, dado).then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      })
+}
 
 function buscarKpis(req, res) {
 
@@ -41,5 +58,6 @@ function buscarKpis(req, res) {
 
 module.exports = {
     buscarUltimasRolagens,
+    adicionarDado,
     buscarKpis
 }

@@ -139,29 +139,33 @@
             <div class="atributos">
                 <div class="atributo">
                     <p>Força</p>
-                    <button id="roll_forca" class="dado" onclick="roll(forc)"></button>
+                    <button id="roll_forca" class="dado" onclick="roll(bonusFor)"></button>
                 </div>
                 <div class="atributo">
                     <p>Destreza</p>
-                    <button id="roll_des" class="dado" onclick="roll(des)"></button>
+                    <button id="roll_des" class="dado" onclick="roll(bonusDes)"></button>
                 </div>
                 <div class="atributo">
                     <p>Constituição</p>
-                    <button id="roll_cons" class="dado" onclick="roll(cons)"></button>
+                    <button id="roll_cons" class="dado" onclick="roll(bonusCons)"></button>
                 </div>
                 <div class="atributo">
                     <p>Inteligência</p>
-                    <button id="roll_int" class="dado" onclick="roll(intel)"></button>
+                    <button id="roll_int" class="dado" onclick="roll(bonusInt)"></button>
                 </div>
                 <div class="atributo">
                     <p>Sabedoria</p>
-                    <button id="roll_sab" class="dado" onclick="roll(sab)"></button>
+                    <button id="roll_sab" class="dado" onclick="roll(bonusSab)"></button>
                 </div>
                 <div class="atributo">
                     <p>Carisma</p>
-                    <button id="roll_car" class="dado" onclick="roll(car)"></button>
+                    <button id="roll_car" class="dado" onclick="roll(bonusCar)"></button>
                 </div>
             </div>
+            <dialog id="dialogo_resultado" popover="auto" onclick="fechar()">
+                    <div id="div_dado"></div>
+                    <div id="div_bonus"></div>
+                </dialog>
             <div class="pericias">
                 <div><button id="roll_acrobacia" class="dadinho" onclick="rollPericia(acrobacia)"></button><label
                         for="roll_acrobacia">Acrobacia
@@ -229,7 +233,9 @@
 </html>
 <script>
 
-    window.onload = exibirPersonagensPorPlayer()
+    window.onload = atualizarPersonagens()
+
+    console.log(sessionStorage.ID_USUARIO)
 
     let idPersonagemAtual = 0
 
@@ -268,19 +274,19 @@
     let religiaoPersonagem = false
     let sobrevivenciaPersonagem = false
 
-    function exibirPersonagensPorPlayer() {
+    function exibirPersonagensPorPlayer(antigo) {
         var personagens = JSON.parse(sessionStorage.PERSONAGENS);
         let pula = false
+        slct_personagem.innerHTML = `<option value=""></option>
+                    <option value="novo">Novo personagem...</option>`
         personagens.forEach(item => {
-            if (item.nome != ''){
-            document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
-            // obterDadosGrafico(item.id)
+            if (item.nome != '') {
+                document.getElementById("slct_personagem").innerHTML += `<option id='${item.id_personagem}'>${item.nome}</option>`
+                // obterDadosGrafico(item.id)
             }
         });
 
-        if (personagens.length > 0) {
-            // exibirAquario(personagens[0].id)
-        }
+        slct_personagem.value = antigo
     }
 
     function trocaPersonagem() {
@@ -343,6 +349,7 @@
                 }
             })
         }
+        atualizarPersonagens()
     }
     function criarPersonagem() {
         let nome = ipt_nome.value
@@ -405,44 +412,44 @@
             hp_total = Number(hp_total)
             hp_atual = Number(hp_total)
         }
-        let placeholder = {
-            "acrobacia": acrobacia,
-            "arcanismo": arcanismo,
-            "atletismo": atletismo,
-            "atuacao": atuacao,
-            "blefar": blefar,
-            "car": car,
-            "classe": classe,
-            "cons": cons,
-            "criado_em": "2000-01-01T02:00:00.000Z",
-            "des": des,
-            "fk_personagem": 200,
-            "fk_player": sessionStorage.ID_USUARIO,
-            "forc": forc,
-            "furtividade": furtividade,
-            "historia": historia,
-            "hp_atual": hp_atual,
-            "hp_total": hp_total,
-            "id_personagem": 200,
-            "intel": intel,
-            "intimidacao": intimidacao,
-            "intuicao": intuicao,
-            "investigacao": investicacao,
-            "lidar_animais": lidar_animais,
-            "medicina": medicina,
-            "modificado_em": "2000-01-01T02:00:00.000Z",
-            "natureza": natureza,
-            "nome": nome,
-            "percepcao": percepcao,
-            "persuasao": persuasao,
-            "prestidigitacao": prestidigitacao,
-            "raca": raca,
-            "religiao": religiao,
-            "sab": sab,
-            "sobrevivencia": sobrevivencia
-        }
-        
-        sessionStorage.PERSONAGENS[sessionStorage.PERSONAGENS.length] += placeholder
+        // let placeholder = {
+        //     "acrobacia": acrobacia,
+        //     "arcanismo": arcanismo,
+        //     "atletismo": atletismo,
+        //     "atuacao": atuacao,
+        //     "blefar": blefar,
+        //     "car": car,
+        //     "classe": classe,
+        //     "cons": cons,
+        //     "criado_em": "2000-01-01T02:00:00.000Z",
+        //     "des": des,
+        //     "fk_personagem": 200,
+        //     "fk_player": sessionStorage.ID_USUARIO,
+        //     "forc": forc,
+        //     "furtividade": furtividade,
+        //     "historia": historia,
+        //     "hp_atual": hp_atual,
+        //     "hp_total": hp_total,
+        //     "id_personagem": 200,
+        //     "intel": intel,
+        //     "intimidacao": intimidacao,
+        //     "intuicao": intuicao,
+        //     "investigacao": investicacao,
+        //     "lidar_animais": lidar_animais,
+        //     "medicina": medicina,
+        //     "modificado_em": "2000-01-01T02:00:00.000Z",
+        //     "natureza": natureza,
+        //     "nome": nome,
+        //     "percepcao": percepcao,
+        //     "persuasao": persuasao,
+        //     "prestidigitacao": prestidigitacao,
+        //     "raca": raca,
+        //     "religiao": religiao,
+        //     "sab": sab,
+        //     "sobrevivencia": sobrevivencia
+        // }
+
+        // sessionStorage.PERSONAGENS[sessionStorage.PERSONAGENS.length] += placeholder
 
         let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forc, des, cons, intel, sab, car, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, hp_total, hp_atual)
 
@@ -525,7 +532,7 @@
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
-            exibirPersonagensPorPlayer()
+        atualizarPersonagens()
     }
 
     function bonus(atributo) {
@@ -545,11 +552,17 @@
         } else {
             barra_hp.value = hpAPersonagem
             numero_hp.innerHTML = `${hpAPersonagem}/${hpTPersonagem}`
-            atualizarVida(sessionStorage.ID_USUARIO, slct_personagem.value, hpAPersonagem)
+            atualizarVida()
         }
     }
 
-    function atualizarVida (id, nome, vida){
+    function atualizarVida() {
+        let id = sessionStorage.ID_USUARIO
+        let nome = slct_personagem.value
+        let vida = hpAPersonagem
+
+        console.log(`id = ${id}, nome = ${nome}, vida = ${vida}`)
+
         fetch("/personagem/atualizarVida", {
             method: "POST",
             headers: {
@@ -558,7 +571,7 @@
             body: JSON.stringify({
                 idServer: id,
                 nomeServer: nome,
-                hp_atualServer: vida
+                hpServer: vida
             }),
         })
             .then(function (resposta) {
@@ -573,5 +586,66 @@
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
+    }
+
+    function atualizarPersonagens() {
+        let personagemAtual = slct_personagem.value
+        const idServer = sessionStorage.ID_USUARIO
+        fetch("/personagem/atualizar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: idServer
+            })
+        }).then(function (resposta) {
+            console.log("Atualizando personagens!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    sessionStorage.PERSONAGENS = JSON.stringify(json.personagens)
+                });
+
+            }
+
+        })
+
+        exibirPersonagensPorPlayer(personagemAtual)
+    }
+
+    function roll(bonus) {
+        let dado = (Math.random() * (20 - 1) + 1).toFixed(0)
+        let dado_final = Number(dado) + Number(bonus)
+
+        fetch("/resultado/adicionarDado", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.ID_USUARIO,
+                nomeServer: slct_personagem.value,
+                dadoServer: dado_final
+            }),
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                console.log("Dado adicionado no banco!")
+                console.log(resposta);
+            }else{
+                console.log('Erro')
+            }
+
+        })
+        dialogo_resultado.open = true
+        div_dado.innerHTML = dado_final
+        div_bonus.innerHTML = `d20 + ${Number(bonus)}`
+        return dado
+    }
+
+    function fechar(){
+        dialogo_resultado.open = false
     }
 </script>

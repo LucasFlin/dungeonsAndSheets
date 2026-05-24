@@ -11,4 +11,8 @@ router.get("/kpis/:id_player", function (req, res) {
     resultadoController.buscarKpis(req, res);
 })
 
+router.post("/adicionarDado", function(req,res) {
+    resultadoController.adicionarDado(req, res);
+})
+
 module.exports = router;

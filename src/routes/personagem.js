@@ -18,4 +18,8 @@ router.get("/buscarAtributos", function (req, res) {
 router.post("/atualizarVida", function (req, res) {
   personagemController.atualizarVida(req, res);
 });
+
+router.post("/atualizar", function (req, res) {
+    personagemController.atualizar(req, res);
+})
 module.exports = router;

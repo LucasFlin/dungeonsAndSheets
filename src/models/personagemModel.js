@@ -35,6 +35,8 @@ function atualizarVida(id, nome, hp_atual) {
   console.log("Executando a instrução SQL: \n" + instrucaoVida);
   database.executar(instrucaoVida)
 }
+
+
 module.exports = {
   buscarPersonagensPorPlayer,
   buscarAtributos,

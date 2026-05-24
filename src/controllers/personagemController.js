@@ -16,15 +16,14 @@ function buscarPersonagensPorPlayer(req, res) {
   });
 }
 
-function atualizarVida(req, res){
+function atualizarVida(req, res) {
   var playerId = req.body.idServer;
   var nome = req.body.nomeServer
-  var hp_atual = req.body.hp_atualServer
+  var hp_atual = req.body.hpServer
 
   if (playerId == undefined) {
     res.status(400).send("idUsuario está undefined!");
   } else {
-
 
     personagemModel.atualizarVida(playerId, nome, hp_atual)
       .then((resultado) => {
@@ -110,9 +109,32 @@ function buscarAtributos(req, res) {
   });
 }
 
+function atualizar(req, res) {
+  var playerId = req.body.idServer;
+  console.log(playerId)
+
+  personagemModel.buscarPersonagensPorPlayer(playerId)
+    .then((resultadoPersonagens) => {
+      if (resultadoPersonagens.length > 0) {
+        res.json({
+          personagens: resultadoPersonagens
+        });
+      } else {
+        res.status(204).json({ personagens: [] });
+      }
+    }).catch(
+      function (erro) {
+        console.log(erro);
+        console.log("\nNão foi possivel atualizar os personagens! Erro: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+      }
+    )
+}
+
 module.exports = {
   buscarPersonagensPorPlayer,
   buscarAtributos,
   atualizarVida,
+  atualizar,
   cadastrar
 }
