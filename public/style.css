@@ -128,6 +128,23 @@ body{
     cursor: pointer;
     transition: 0.3s;
 }
+.botaozinho{
+    background: #c62b29;
+    color: white;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 10px 30px 10px 30px;
+    border-style: none;
+    margin: 0px 10px 0px 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.graf_vida{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .botao:hover{
     padding: 19px 31px 21px 31px;
@@ -178,7 +195,7 @@ body{
 
 .titulo{
     font-family: "FonteHUD";
-    font-size: larger   ;
+    font-size: larger;
 }
 
 .grafico{
@@ -193,9 +210,66 @@ body{
     width: 100vw;
 }
 
+.ficha{
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px 10px 20px;
+    border-color: #c62b29;
+    font-family: 'FonteHUD';
+}
+
 .ficha-stats{
     display: flex;
     justify-content: space-evenly;
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 10px;
+    color: aliceblue;
+    margin: 10px 10px 20px 10px;
+    background-color: #c62b29;
+    input{
+        border-radius: 10px;
+    }
+}
+
+.ficha-botao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label:hover{
+    cursor: pointer;
+}
+
+.ficha-campos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px 20px 0px;
+    width: 100%;
+    width: 800px;
+}
+
+.ficha-pericias{
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    border: 1px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+    label{
+        margin: 6.5px 5px 6.5px 2px;
+    }
+    input{
+        margin: 6.5px 2px 6.5px 5px;
+    }
+    div{
+        border-style: solid;
+        border-width: 1px;
+        margin: 6px;
+    }
 }
 
 .hp{
@@ -213,7 +287,7 @@ body{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
+    margin: 40px;
     width: 90vw;
 }
 
@@ -226,6 +300,9 @@ body{
     background: url(./img/d20.png) no-repeat center center/cover;
     height: 90px;
     width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 10px;
     border-style: none;
     border-width: 1px;
@@ -236,6 +313,9 @@ body{
     animation: rodar 0.2s ease;
 }
 
+.proficiente{
+background: url(./img/d20_col.png) no-repeat center center/cover !important;
+}
 
 .dadinho{
     background: url(./img/d20.png) no-repeat center center/cover;
@@ -279,9 +359,84 @@ body{
 .caixa_atributos{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 15px;
     margin: 15px;
-    border-width: 1px;
+    max-width: 90vw;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: #c62b29;
+    border-style: solid;
+}
+
+.ipt_atributo{
+    height: 50px;
+    width: 50px;
+    margin: 0px 20px 0px 20px;
+    text-align: center;
+}
+
+.ficha-input{
+    width: 300px;
+    height: 50px;
+    font-family: "FonteEscrita";
+    font-size: x-large;
     border-radius: 10px;
     border-style: solid;
+}
+.ficha-input-nome{
+    width: 785px;
+    height: 50px;
+    font-family: "FonteEscrita";
+    font-size: x-large;
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    outline-style: none;
+    margin-top: -5px;
+    background: none;
+}
+
+.ficha-caixas-input{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+.caixa-rolagem{
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+    border-color: #c62b29;
+}
+
+.rolagem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.hp{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: "FonteHUD";
+    font-size: large;
+    p{
+        margin: 5px;
+    }
+}
+
+.barra{
+    height: 50px;
+}
+
+.select_personagem{
+    font-family: "FonteEscrita";
+    font-size: xx-large;
+    border-radius: 10px;
 }

@@ -25,19 +25,19 @@
         <div>
             <!-- Personagem e vida -->
 
-            <dialog popover="auto" id="criar_ficha" class="ficha">
-                <div class="ficha-input">
+            <dialog popover="auto" open="false" id="criar_ficha" class="ficha">
+                <div class="ficha-caixas-input">
                     <span>Nome:</span>
-                    <input type="text" id="ipt_nome">
+                    <input class="ficha-input-nome" type="text" id="ipt_nome">
                 </div>
                 <div class="ficha-campos">
-                    <div class="ficha-input">
+                    <div class="ficha-caixas-input">
                         <span>Raça:</span>
-                        <input type="text" id="ipt_raca">
+                        <input class="ficha-input" type="text" id="ipt_raca">
                     </div>
-                    <div class="ficha-input">
+                    <div class="ficha-caixas-input">
                         <span>Classe:</span>
-                        <select id="ipt_classe">
+                        <select class="ficha-input" id="ipt_classe">
                             <option value="guerreiro">Guerreiro</option>
                             <option value="ladino">Ladino</option>
                             <option value="mago">Mago</option>
@@ -55,32 +55,38 @@
                 </div>
                 <div>
                     <div class="ficha-stats">
-                        <div>
-                            <input type="number" id="ipt_for">
+                        <div class="atributo">
+                            <p>Força</p>
+                            <input type="number" id="ipt_for" class='ipt_atributo' oninput="atualizaTxt(ipt_for, div_for)">
                             <div id="div_for">0</div>
                         </div>
-                        <div>
-                            <input type="number" id="ipt_dex">
+                        <div class="atributo">
+                            <p>Destreza</p>
+                            <input type="number" id="ipt_dex" class='ipt_atributo' oninput="atualizaTxt(ipt_dex, div_dex)">
                             <div id="div_dex">0</div>
                         </div>
-                        <div>
-                            <input type="number" id="ipt_const">
+                        <div class="atributo">
+                            <p>Constituição</p>
+                            <input type="number" id="ipt_const" class='ipt_atributo' oninput="atualizaTxt(ipt_const, div_con)">
                             <div id="div_con">0</div>
                         </div>
-                        <div>
-                            <input type="number" id="ipt_int">
+                        <div class="atributo">
+                            <p>Inteligência</p>
+                            <input type="number" id="ipt_int" class='ipt_atributo' oninput="atualizaTxt(ipt_int, div_int)">
                             <div id="div_int">0</div>
                         </div>
-                        <div>
-                            <input type="number" id="ipt_sab">
+                        <div class="atributo">
+                            <p>Sabedoria</p>
+                            <input type="number" id="ipt_sab" class='ipt_atributo' oninput="atualizaTxt(ipt_sab, div_sab)">
                             <div id="div_sab">0</div>
                         </div>
-                        <div>
-                            <input type="number" id="ipt_car">
+                        <div class="atributo">
+                            <p>Carisma</p>
+                            <input type="number" id="ipt_car" class='ipt_atributo' oninput="atualizaTxt(ipt_car, div_car)">
                             <div id="div_car">0</div>
                         </div>
                     </div>
-                    <div>
+                    <div class="ficha-pericias">
                         <div><input type="checkbox" id="chk_acrobacia"><label for="chk_acrobacia">Acrobacia
                                 <span>(Des)</span></label></div>
                         <div><input type="checkbox" id="chk_arcanismo"><label for="chk_arcanismo">Arcanismo
@@ -118,19 +124,22 @@
                         <div><input type="checkbox" id="chk_sobrevivencia"><label for="chk_sobrevivencia">Sobrevivência
                                 <span>(Sab)</span></label></div>
                     </div>
-                    <button onclick="criarPersonagem()">Criar Personagem</button>
+                    <div class="ficha-botao">
+                    <button onclick="criarPersonagem()" class="botao">Criar Personagem</button>
+                    <button onclick="fechar(criar_ficha)" class="botao">Cancelar</button>
+                    </div>
                 </div>
             </dialog>
             <div class="linha">
                 <select id="slct_personagem" oninput="trocaPersonagem()" class="select_personagem">
-                    <option value=""></option>
+                    <option value="">Selecione um personagem</option>
                     <option value="novo">Novo personagem...</option>
                 </select>
                 <div class="hp">
                     <p id="numero_hp">--/--</p>
                     <div class="graf_vida">
-                        <button onclick="vida(-1)">-</button> <progress id="barra_hp"></progress> <button
-                            onclick="vida(+1)">+</button>
+                        <button onclick="vida(-1)" class="botaozinho">-</button> <progress id="barra_hp" value="0" max="0" class="barra"></progress> <button
+                            onclick="vida(+1)" class="botaozinho">+</button>
                     </div>
                 </div>
             </div>
@@ -162,70 +171,67 @@
                     <button id="roll_car" class="dado" onclick="roll(bonusCar)"></button>
                 </div>
             </div>
-            <dialog id="dialogo_resultado" popover="auto" onclick="fechar()">
-                    <div id="div_dado"></div>
+            <dialog id="dialogo_resultado" class="caixa-rolagem" popover="auto" onclick="fechar(dialogo_resultado)">
+                <div class="rolagem">
+                    <div id="div_dado" class="dado"></div>
                     <div id="div_bonus"></div>
+                    </div>
                 </dialog>
             <div class="pericias">
-                <div><button id="roll_acrobacia" class="dadinho" onclick="rollPericia(acrobacia)"></button><label
-                        for="roll_acrobacia">Acrobacia
+                <div><button id="acrobacia" class="dadinho" onclick="rollPericia(bonusDes, acrobaciaPersonagem)"></button><label
+                        for="acrobacia">Acrobacia
                         <span>(Des)</span></label></div>
-                <div><button id="roll_arcanismo" class="dadinho" onclick="rollPericia(arcanismo)"></button><label
-                        for="roll_arcanismo">Arcanismo
+                <div><button id="arcanismo" class="dadinho" onclick="rollPericia(bonusInt, arcanismoPersonagem)"></button><label
+                        for="arcanismo">Arcanismo
                         <span>(Int)</span></label></div>
-                <div><button id="roll_atletismo" class="dadinho" onclick="rollPericia(atletismo)"></button><label
-                        for="roll_atletismo">Atletismo
+                <div><button id="atletismo" class="dadinho" onclick="rollPericia(bonusFor, atletismoPersonagem)"></button><label
+                        for="atletismo">Atletismo
                         <span>(For)</span></label></div>
-                <div><button id="roll_atuacao" class="dadinho" onclick="rollPericia(atuacao)"></button><label
-                        for="roll_atuacao">Atuação
+                <div><button id="atuacao" class="dadinho" onclick="rollPericia(bonusCar, atuacaoPersonagem)"></button><label
+                        for="atuacao">Atuação
                         <span>(Car)</span></label></div>
-                <div><button id="roll_enganacao" class="dadinho" onclick="rollPericia(blefar)"></button><label
-                        for="roll_enganacao">Enganação
+                <div><button id="enganacao" class="dadinho" onclick="rollPericia(bonusCar, enganacaoPersonagem)"></button><label
+                        for="enganacao">Enganação
                         <span>(Car)</span></label></div>
-                <div><button id="roll_furtividade" class="dadinho" onclick="rollPericia(furtividade)"></button><label
-                        for="roll_furtividade">Furtividade
+                <div><button id="furtividade" class="dadinho" onclick="rollPericia(bonusDes, furtividadePersonagem)"></button><label
+                        for="furtividade">Furtividade
                         <span>(Des)</span></label></div>
-                <div><button id="roll_historia" class="dadinho" onclick="rollPericia(historia)"></button><label
-                        for="roll_historia">Historia
+                <div><button id="historia" class="dadinho" onclick="rollPericia(bonusInt, historiaPersonagem)"></button><label
+                        for="historia">Historia
                         <span>(Int)</span></label></div>
-                <div><button id="roll_intimidacao" class="dadinho" onclick="rollPericia(intimidacao)"></button><label
-                        for="roll_intimidacao">Intimidação
+                <div><button id="intimidacao" class="dadinho" onclick="rollPericia(bonusCar, intimidacaoPersonagem)"></button><label
+                        for="intimidacao">Intimidação
                         <span>(Car)</span></label></div>
-                <div><button id="roll_intuicao" class="dadinho" onclick="rollPericia(intuicao)"></button><label
-                        for="roll_intuicao">Intuição
+                <div><button id="intuicao" class="dadinho" onclick="rollPericia(intuicaoPersonagem)"></button><label
+                        for="intuicao">Intuição
                         <span>(Sab)</span></label></div>
-                <div><button id="roll_investigacao" class="dadinho" onclick="rollPericia(investigacao)"></button><label
-                        for="roll_investigacao">Investigação
+                <div><button id="investigacao" class="dadinho" onclick="rollPericia(bonusInt, investicacaoPersonagem)"></button><label
+                        for="investigacao">Investigação
                         <span>(Int)</span></label></div>
-                <div><button id="roll_lidar" class="dadinho" onclick="rollPericia(lidar_animais)"></button><label
-                        for="roll_lidar">Lidar com Animais
+                <div><button id="lidar" class="dadinho" onclick="rollPericia(bonusSab, lidarPersonagem)"></button><label
+                        for="lidar">Lidar com Animais
                         <span>(Sab)</span></label></div>
-                <div><button id="roll_medicina" class="dadinho" onclick="rollPericia(medicina)"></button><label
-                        for="roll_medicina">Medicina
+                <div><button id="medicina" class="dadinho" onclick="rollPericia(bonusSab, medicinaPersonagem)"></button><label
+                        for="medicina">Medicina
                         <span>(Sab)</span></label></div>
-                <div><button id="roll_natureza" class="dadinho" onclick="rollPericia(natureza)"></button><label
-                        for="roll_natureza">Natureza
+                <div><button id="natureza" class="dadinho" onclick="rollPericia(bonusInt, naturezaPersonagem)"></button><label
+                        for="natureza">Natureza
                         <span>(Int)</span></label></div>
-                <div><button id="roll_percepcao" class="dadinho" onclick="rollPericia(percepcao)"></button><label
-                        for="roll_percepcao">Percepção
+                <div><button id="percepcao" class="dadinho" onclick="rollPericia(bonusSab, percepcaoPersonagem)"></button><label
+                        for="percepcao">Percepção
                         <span>(Sab)</span></label></div>
-                <div><button id="roll_persuasao" class="dadinho" onclick="rollPericia(persuasao)"></button><label
-                        for="roll_persuasao">Persuasão
+                <div><button id="persuasao" class="dadinho" onclick="rollPericia(bonusCar, persuasaoPersonagem)"></button><label
+                        for="persuasao">Persuasão
                         <span>(Car)</span></label></div>
-                <div><button id="roll_prestidigitacao" class="dadinho"
-                        onclick="rollPericia(prestidigitacao)"></button><label
-                        for="roll_prestidigitacao">Prestidigitação
+                <div><button id="prestidigitacao" class="dadinho" onclick="rollPericia(bonusDes, prestidigitacaoPersonagem)"></button><label
+                        for="prestidigitacao">Prestidigitação
                         <span>(Des)</span></label></div>
-                <div><button id="roll_religiao" class="dadinho" onclick="rollPericia(religiao)"></button><label
-                        for="roll_religiao">Religião
+                <div><button id="religiao" class="dadinho" onclick="rollPericia(bonusInt, religiaoPersonagem)"></button><label
+                        for="religiao">Religião
                         <span>(Int)</span></label></div>
-                <div><button id="roll_sobrevivencia" class="dadinho"
-                        onclick="rollPericia(sobrevivencia)"></button><label for="roll_sobrevivencia">Sobrevivência
+                <div><button id="sobrevivencia" class="dadinho" onclick="rollPericia(bonusSab, sobrevivenciaPersonagem)"></button><label for="roll_sobrevivencia">Sobrevivência
                         <span>(Sab)</span></label></div>
             </div>
-        </div>
-        <div>
-
         </div>
     </div>
 </body>
@@ -233,8 +239,8 @@
 </html>
 <script>
 
-    window.onload = atualizarPersonagens()
-
+    window.onload = atualizarPersonagens(),
+    criar_ficha.close()
     console.log(sessionStorage.ID_USUARIO)
 
     let idPersonagemAtual = 0
@@ -277,7 +283,7 @@
     function exibirPersonagensPorPlayer(antigo) {
         var personagens = JSON.parse(sessionStorage.PERSONAGENS);
         let pula = false
-        slct_personagem.innerHTML = `<option value=""></option>
+        slct_personagem.innerHTML = `<option value="">Selecione um personagem</option>
                     <option value="novo">Novo personagem...</option>`
         personagens.forEach(item => {
             if (item.nome != '') {
@@ -346,12 +352,120 @@
                     roll_sab.innerHTML = bonusSab
                     roll_car.innerHTML = bonusCar
                     numero_hp.innerHTML = `${hpAPersonagem}/${hpTPersonagem}`
+
+                    if (acrobaciaPersonagem == true) {
+                        acrobacia.classList.add('proficiente')
+                    }else{
+                        acrobacia.classList.remove('proficiente')
+                    }
+
+                    if (arcanismoPersonagem == true) {
+                        arcanismo.classList.add('proficiente')
+                    }else{
+                        arcanismo.classList.remove('proficiente')
+                    }
+
+                    if (atletismoPersonagem == true) {
+                        atletismo.classList.add('proficiente')
+                    }else{
+                        atletismo.classList.remove('proficiente')
+                    }
+
+                    if (atuacaoPersonagem == true) {
+                        atuacao.classList.add('proficiente')
+                    }else{
+                        atuacao.classList.remove('proficiente')
+                    }
+
+                    if (enganacaoPersonagem == true) {
+                        enganacao.classList.add('proficiente')
+                    }else{
+                        enganacao.classList.remove('proficiente')
+                    }
+
+                    if (furtividadePersonagem == true) {
+                        furtividade.classList.add('proficiente')
+                    }else{
+                        furtividade.classList.remove('proficiente')
+                    }
+
+                    if (historiaPersonagem == true) {
+                        historia.classList.add('proficiente')
+                    }else{
+                        historia.classList.remove('proficiente')
+                    }
+
+                    if (intimidacaoPersonagem == true) {
+                        intimidacao.classList.add('proficiente')
+                    }else{
+                        intimidacao.classList.remove('proficiente')
+                    }
+
+                    if (intuicaoPersonagem == true) {
+                        intuicao.classList.add('proficiente')
+                    }else{
+                        intuicao.classList.remove('proficiente')
+                    }
+
+                    if (investicacaoPersonagem == true) {
+                        investigacao.classList.add('proficiente')
+                    }else{
+                        investigacao.classList.remove('proficiente')
+                    }
+
+                    if (lidarPersonagem == true) {
+                        lidar.classList.add('proficiente')
+                    }else{
+                        lidar.classList.remove('proficiente')
+                    }
+
+                    if (medicinaPersonagem == true) {
+                        medicina.classList.add('proficiente')
+                    }else{
+                        medicina.classList.remove('proficiente')
+                    }
+
+                    if (naturezaPersonagem == true) {
+                        natureza.classList.add('proficiente')
+                    }else{
+                        natureza.classList.remove('proficiente')
+                    }
+
+                    if (percepcaoPersonagem == true) {
+                        percepcao.classList.add('proficiente')
+                    }else{
+                        percepcao.classList.remove('proficiente')
+                    }
+
+                    if (persuasaoPersonagem == true) {
+                        persuasao.classList.add('proficiente')
+                    }else{
+                        persuasao.classList.remove('proficiente')
+                    }
+
+                    if (prestidigitacaoPersonagem == true) {
+                        prestidigitacao.classList.add('proficiente')
+                    }else{
+                        prestidigitacao.classList.remove('proficiente')
+                    }
+
+                    if (religiaoPersonagem == true) {
+                        religiao.classList.add('proficiente')
+                    }else{
+                        religiao.classList.remove('proficiente')
+                    }
+
+                    if (sobrevivenciaPersonagem == true) {
+                        sobrevivencia.classList.add('proficiente')
+                    }else{
+                        sobrevivencia.classList.remove('proficiente')
+                    }
                 }
             })
         }
         atualizarPersonagens()
     }
-    function criarPersonagem() {
+    async function criarPersonagem() {
         let nome = ipt_nome.value
         let raca = ipt_raca.value
         let classe = ipt_classe.value
@@ -412,52 +526,14 @@
             hp_total = Number(hp_total)
             hp_atual = Number(hp_total)
         }
-        // let placeholder = {
-        //     "acrobacia": acrobacia,
-        //     "arcanismo": arcanismo,
-        //     "atletismo": atletismo,
-        //     "atuacao": atuacao,
-        //     "blefar": blefar,
-        //     "car": car,
-        //     "classe": classe,
-        //     "cons": cons,
-        //     "criado_em": "2000-01-01T02:00:00.000Z",
-        //     "des": des,
-        //     "fk_personagem": 200,
-        //     "fk_player": sessionStorage.ID_USUARIO,
-        //     "forc": forc,
-        //     "furtividade": furtividade,
-        //     "historia": historia,
-        //     "hp_atual": hp_atual,
-        //     "hp_total": hp_total,
-        //     "id_personagem": 200,
-        //     "intel": intel,
-        //     "intimidacao": intimidacao,
-        //     "intuicao": intuicao,
-        //     "investigacao": investicacao,
-        //     "lidar_animais": lidar_animais,
-        //     "medicina": medicina,
-        //     "modificado_em": "2000-01-01T02:00:00.000Z",
-        //     "natureza": natureza,
-        //     "nome": nome,
-        //     "percepcao": percepcao,
-        //     "persuasao": persuasao,
-        //     "prestidigitacao": prestidigitacao,
-        //     "raca": raca,
-        //     "religiao": religiao,
-        //     "sab": sab,
-        //     "sobrevivencia": sobrevivencia
-        // }
-
-        // sessionStorage.PERSONAGENS[sessionStorage.PERSONAGENS.length] += placeholder
 
         let idPersonagem = cadastrar(sessionStorage.ID_USUARIO, nome, raca, classe, forc, des, cons, intel, sab, car, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, hp_total, hp_atual)
 
         console.log(sessionStorage.ID_USUARIO, nome, raca, classe, forc, des, cons, intel, sab, car, acrobacia, lidar_animais, arcanismo, atletismo, atuacao, blefar, furtividade, historia, intimidacao, intuicao, investicacao, medicina, natureza, percepcao, persuasao, prestidigitacao, religiao, sobrevivencia, sobrevivencia, hp_atual)
-
-        console.log(`Id do personagem criado: ${idPersonagem}`)
-        slct_personagem.innerHTML += `<option id='${idPersonagem}'>${nome}</option>`
         criar_ficha.open = false
+
+        await atualizarPersonagens()
+        await atualizarPersonagens()
     }
 
     function toTinyInt(pericia) {
@@ -532,7 +608,6 @@
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
-        atualizarPersonagens()
     }
 
     function bonus(atributo) {
@@ -645,7 +720,49 @@
         return dado
     }
 
-    function fechar(){
-        dialogo_resultado.open = false
+    function rollPericia(bonus, pericia){
+        let dado = (Math.random() * (20 - 1) + 1).toFixed(0)
+        let dado_final = Number(dado) + Number(bonus)
+        let prof = '+0'
+
+        if(pericia == true){
+            dado_final += 2
+            prof = '+2'
+        }
+
+        fetch("/resultado/adicionarDado", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.ID_USUARIO,
+                nomeServer: slct_personagem.value,
+                dadoServer: dado_final
+            }),
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                console.log("Dado adicionado no banco!")
+                console.log(resposta);
+            }else{
+                console.log('Erro')
+            }
+
+        })
+        dialogo_resultado.open = true
+        div_dado.innerHTML = dado_final
+        if(bonus == 0){
+            bonus = '+0'
+        }
+        div_bonus.innerHTML = `${dado} ${bonus} ${prof} `
+        return dado
+    }
+
+    function fechar(dialogo){
+        dialogo.open = false
+    }
+
+    function atualizaTxt(ipt, div){
+        div.innerHTML = bonus(ipt.value)
     }
 </script>

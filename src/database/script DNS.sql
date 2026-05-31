@@ -33,30 +33,6 @@ create index lista_jogador on personagens(fk_player);
 insert into personagens (id_personagem, fk_player, nome, raca, classe, forc, des, cons, intel, sab, car)
 value (0, 1, 'placeholder', 'placeholder', 'placeholder', 0, 0, 0, 0, 0, 0);
 
-create table itens_inventario (
-id_item int auto_increment,
-fk_personagem int,
-foreign key itens_inventario(fk_personagem) references personagens(id_personagem),
-primary key(id_item, fk_personagem),
-nome varchar(50) not null,
-descricao varchar(100),
-quantidade int default 1);
-create index lista_inventario on itens_inventario(fk_personagem);
-
-create table habilidades (
-id_habilidade int auto_increment,
-fk_personagem int,
-foreign key habilidades(fk_personagem) references personagens(id_personagem),
-primary key (id_habilidade, fk_personagem),
-nome varchar(50) not null,
-descricao varchar(200),
-origem varchar(50) not null,
-resistencia int,
-qnt_dado int,
-tp_dado int,
-bonus int);
-create index lista_habilidades on habilidades(fk_personagem);
-
 CREATE TABLE pericias (
 fk_player int,
 fk_personagem int,

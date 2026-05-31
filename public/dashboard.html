@@ -33,7 +33,7 @@
                         <span class="titulo" id="forte">Lorem Ipsum</span>
                     </div>
                 </div>
-                <div class="dash-atributo"> 
+                <div class="dash-atributo">
                     <p class="titulo">Seu personagem mais <span class="destaque">Resistente</span>:</p>
                     <div class="dash-personagem">
                         <span class="titulo" id="resistente">Lorem Ipsum</span>
@@ -76,13 +76,13 @@
 
 </html>
 <script>
-    
+
     let personagem = []
 
     function obterDadosGrafico(playerId) {
 
-
         fetch(`/resultado/ultimas/${playerId}`).then(function (response) {
+            console.log(response)
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -98,8 +98,8 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-        
-            fetch(`/resultado/kpis/${playerId}`)
+
+        fetch(`/resultado/kpis/${playerId}`)
             .then(resposta => resposta.json())
             .then(kpi => {
                 console.log('KPIs', kpi)
@@ -158,19 +158,19 @@
             type: 'line',
             data: dados,
             options: {
-            scales: {
-                x: {
-                    ticks: {
+                scales: {
+                    x: {
+                        ticks: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
                         display: false
                     }
                 }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
             }
-        }
         };
 
         // Adicionando gráfico criado em div na tela
@@ -184,7 +184,7 @@
 
 
     // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
+    // buscando a última medida inserida em tabela contendo as capturas,
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models

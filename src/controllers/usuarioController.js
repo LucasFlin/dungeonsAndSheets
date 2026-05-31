@@ -37,8 +37,16 @@ function autenticar(req, res) {
                             })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
+                        alert(`Você entrega seu pergaminho para a atendente no balcão.
+
+Após olhar a folha ela te entrega novamente dizendo:
+"Tem algo errado com sua entrada... Poderia conferir e tentar novamente?"`)
                     } else {
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                        alert(`Você entrega seu pergaminho para a atendente no balcão.
+
+Após olhar a folha ela te entrega novamente dizendo:
+"Parece que o login está duplicado, tem um outro cadastro com esse mesmo email e senha..."`)
                     }
                 }
             ).catch(

@@ -104,14 +104,13 @@ function validar(t1, t2, t3, t4) {
         alert(`Após assinar o pergaminho a atendente pega-o e começa a ler os dados informados.
             
 Alguns segundos se passam e ela guarda a folha abaixo do balcão enquanto olha para você com um sorrizo dizendo:
-"Será um prazer ter você com a gente, ${t1}!"`)  
+"Será um prazer ter você com a gente, ${t1}!"`) 
+        window.location = "./login.html"
     }
 
     alerta = `Você está prestes à assinar o formulário de admissão da Guilda, mas a atendente para sua mão antes que a caneta toque o papel.
 
 Ela diz:
 "Calma aí viajante, `
-
-    window.location = "./login.html"
 }
 

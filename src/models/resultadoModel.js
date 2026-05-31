@@ -16,20 +16,20 @@ function buscarUltimasRolagens(playerId) {
 
 function buscarKpis(id_player) {
 
-    var instrucaoSql = `select (select nome from personagens order by forc desc limit 1) as forte,
-    (select nome from personagens order by des desc limit 1) agil,
-    (select nome from personagens order by cons desc limit 1) as resistente,
-    (select nome from personagens order by intel desc limit 1) as inteligente,
-    (select nome from personagens order by sab desc limit 1) as sabio,
-    (select nome from personagens order by car desc limit 1) as carismatico
-    from personagens where fk_player = ${id_player} limit 1;`;
+    var instrucaoSql = `select (select nome from personagens where fk_player = ${id_player} order by forc desc limit 1) as forte,
+    (select nome from personagens where fk_player = ${id_player} order by des desc limit 1) agil,
+    (select nome from personagens where fk_player = ${id_player} order by cons desc limit 1) as resistente,
+    (select nome from personagens where fk_player = ${id_player} order by intel desc limit 1) as inteligente,
+    (select nome from personagens where fk_player = ${id_player} order by sab desc limit 1) as sabio,
+    (select nome from personagens where fk_player = ${id_player} order by car desc limit 1) as carismatico
+    from personagens limit 1;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function adicionarDado(id, nome, dado){
-    var instrucaoDado = `insert into resultados (fk_player, fk_personagem, dado) value (${2}, (select id_personagem from personagens where fk_player = ${id} and nome = '${nome}'), ${dado})`
+    var instrucaoDado = `insert into resultados (fk_player, fk_personagem, dado) value (${id}, (select id_personagem from personagens where fk_player = ${id} and nome = '${nome}'), ${dado})`
     console.log("Executando a instrução SQL: \n" + instrucaoDado);
     return database.executar(instrucaoDado);
 }
